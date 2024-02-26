@@ -1,0 +1,40 @@
+<h1>Write Articles</h1>
+<section class="container d-flex row gx-5">
+    <div class= "col-6">
+        <form action="" method="POST">
+
+        <div class="mb-3">
+            <label for="topic" class="form-label">Article concerné (topic actuel <strong><?= $posts['topic']; ?></strong>)</label>
+            <input type="text" class="form-control" id="topic" name="topic" placeholder="Topic" value="<?= $posts['topic']; ?>">
+        </div>
+        <div class="mb-3">
+            <label for="place" class="form-label">Placement dans l'article</label>
+            <input type="number" min="1" class="form-control" id="place" name="place" placeholder="Place in the article hierarchy">
+        </div>
+        <ul class="list-group list-unstyled">
+            <li>
+                <div class="mb-3 form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"  checked>
+
+                <label for="article" class="form-label">Texte</label>
+                <textarea type="text" class="form-control" id="article" name="article" placeholder="Write something..."></textarea>
+                </div>
+            </li>
+            <li>
+                <div class="mb-3 form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+
+                <label for="image" class="form-label">Image</label>
+                <input type="text" value="<?= $the_post['image']; ?>" class="form-control" id="image" name="image" placeholder="Add an image url">
+                </div>
+            </li>
+        </ul>
+        
+        
+        </form>
+    </div>
+    
+    <div class= "col-6">
+        <p>overview of the article</p>
+    </div>
+</section>

@@ -1,0 +1,24 @@
+<h1>Update Post #<?= $post_id?></h1>
+
+    <form method="POST" action="?page=admin_post_update&id=<?= $the_post['id']; ?>">
+        <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" value="<?= $the_post['title']; ?>" class="form-control" id="title" name="title" placeholder="Add a title">
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea maxlength="255" type="text" class="form-control" id="description" name="description" placeholder="Add a description"><?= $the_post['description']; ?></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="image" class="form-label">Image</label>
+            <input type="text" value="<?= $the_post['image']; ?>" class="form-control" id="image" name="image" placeholder="Add an image url">
+        </div>
+        <div class="mb-3">
+            
+            <input type="submit" class="btn btn-success" value="Update this Post">
+        </div>
+    </form>
+
+
+
+

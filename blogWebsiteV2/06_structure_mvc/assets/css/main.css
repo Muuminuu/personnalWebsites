@@ -1,0 +1,15 @@
+textarea .form-control {
+    height: 100px;
+}
+
+.form-check-input:checked {
+    background-color: aqua;
+}
+
+.perso {
+    height: 48px;
+}
+
+img.thumbnail{
+    width: 100px;
+}

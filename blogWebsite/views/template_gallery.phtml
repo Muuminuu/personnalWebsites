@@ -1,0 +1,20 @@
+
+<section id="gallery" class="row">
+    <?php 
+
+foreach($posts as $article): ?>
+    <?php if(!in_array($article['topic'], $exists)): ?>
+        <article class="col-12 col-md-4 col-sm-6 mb-3">
+            <div class="card">
+                <img src="<?php echo $article['image']; ?>" class="card-img-top" alt="<?= $article['title'] ?>">
+                    <div class="card-body">
+                    <h5 class="card-title"><?php echo $article['title']; ?></h5>
+                    <p class="card-text"><?= (strlen($article['description']) > 60) ? substr($article['description'],0,57).'...' : $article['description']; ?></p>
+                    <a href="?page=article&topic=<?= str_replace(' ', '-', $article['topic']); ?>" class="btn btn-dark">Lire l'article en entier</a>
+                </div>
+            </div>
+        </article>
+        <?php $exists[] = $article['topic'];?>
+    <?php endif; ?>
+<?php endforeach; ?>
+</section>

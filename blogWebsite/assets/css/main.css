@@ -1,0 +1,12 @@
+#caroussel img{
+    aspect-ratio: 16/10;
+}
+#logo{
+  width: 50px;
+}
+#message{
+  height: 120px;
+}
+img.thumbnail{
+  width: 100px;
+}

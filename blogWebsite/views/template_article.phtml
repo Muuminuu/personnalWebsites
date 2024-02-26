@@ -1,0 +1,41 @@
+
+<section>
+
+    <!-- <h5> -->
+        <!-- <?= $post['0']['title']; ?> -->
+    <!-- </h5>  -->
+    <!-- <p><?= $post['0']['description']; ?></p>
+    <div><img src="<?= $post['0']['image']; ?>" /></div> -->
+
+
+
+
+<h5 class=""><?php echo $post['0']['title']; ?></h5>
+<?php foreach($post as $article['0']): ?>
+    <article class="">
+        <div class="">
+            <img src="<?php echo $article['0']['image']; ?>" class="" alt="<?= $article['0']['title']; ?>">
+                <div class="">
+                    <p class=""><?= $article['0']['description']; ?></p>
+                </div>
+        </div>
+    </article>
+<?php endforeach; ?>
+
+
+<h5 class=""><?php echo $post['0']['title']; ?></h5>
+<?php foreach($post as $article['0']): ?>
+    <article class="">
+        <div class="">
+            <img src="<?php echo $article['0']['image']; ?>" class="" alt="<?= $article['0']['title']; ?>">
+                <div class="">
+                    <p class=""><?= $article['0']['description']; ?></p>
+                </div>
+        </div>
+    </article>
+<?php endforeach; ?>
+
+
+
+</section>
+
