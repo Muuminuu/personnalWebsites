@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : lun. 26 fév. 2024 à 18:51
+-- Généré le : lun. 26 fév. 2024 à 22:53
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -24,6 +24,27 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `article`
+--
+
+CREATE TABLE `article` (
+  `id` int(11) NOT NULL,
+  `post_id` int(11) NOT NULL,
+  `article_et_image` text NOT NULL,
+  `place` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `article`
+--
+
+INSERT INTO `article` (`id`, `post_id`, `article_et_image`, `place`) VALUES
+(1, 23, 'premier texte d\'article', 1),
+(2, 23, 'deuxieme texte d\'article', 2);
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `comments`
 --
 
@@ -31,8 +52,20 @@ CREATE TABLE `comments` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `post_id` int(11) NOT NULL,
-  `comment` int(11) NOT NULL
+  `comment` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `comments`
+--
+
+INSERT INTO `comments` (`id`, `user_id`, `post_id`, `comment`) VALUES
+(1, 9, 23, '5644665'),
+(2, 9, 23, '5644665'),
+(3, 9, 23, '5644665'),
+(4, 9, 23, '645'),
+(11, 9, 23, 'sdfsdfsdfsdfsdfsd'),
+(12, 9, 23, 'sdfsdfsdfsdfsdfsd');
 
 -- --------------------------------------------------------
 
@@ -73,8 +106,10 @@ INSERT INTO `contact` (`id`, `user_id`, `firstname`, `lastname`, `address1`, `ad
 
 CREATE TABLE `post` (
   `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `title` varchar(80) NOT NULL,
   `topic` varchar(80) NOT NULL,
+  `description` varchar(255) NOT NULL,
   `article` text NOT NULL,
   `image` text NOT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp()
@@ -84,9 +119,9 @@ CREATE TABLE `post` (
 -- Déchargement des données de la table `post`
 --
 
-INSERT INTO `post` (`id`, `title`, `topic`, `article`, `image`, `created_at`) VALUES
-(22, 'Voyage &agrave; Tahiti', 'tahiti', 'our trip to tahiti!', 'https://cdn.pixabay.com/photo/2015/03/18/21/20/moorea-680033_960_720.jpg', '2024-02-25 22:42:40'),
-(23, 'test', 'test1', 'okokok!!', 'https://cdn.pixabay.com/photo/2015/03/18/21/20/moorea-680033_960_720.jpg', '2024-02-26 06:21:11');
+INSERT INTO `post` (`id`, `user_id`, `title`, `topic`, `description`, `article`, `image`, `created_at`) VALUES
+(22, 9, 'Voyage &agrave; Tahiti', 'tahiti', '', 'our trip to tahiti!', 'https://cdn.pixabay.com/photo/2015/03/18/21/20/moorea-680033_960_720.jpg', '2024-02-25 22:42:40'),
+(23, 9, 'test', 'test1', 'rtertertert', 'okokok!!', 'https://cdn.pixabay.com/photo/2015/03/18/21/20/moorea-680033_960_720.jpg', '2024-02-26 06:21:11');
 
 -- --------------------------------------------------------
 
@@ -116,6 +151,13 @@ INSERT INTO `user` (`id`, `email`, `password`, `roles`, `registered_at`) VALUES
 --
 -- Index pour les tables déchargées
 --
+
+--
+-- Index pour la table `article`
+--
+ALTER TABLE `article`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_post_id_article` (`post_id`);
 
 --
 -- Index pour la table `comments`
@@ -149,10 +191,16 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT pour la table `article`
+--
+ALTER TABLE `article`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT pour la table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT pour la table `contact`
@@ -175,6 +223,12 @@ ALTER TABLE `user`
 --
 -- Contraintes pour les tables déchargées
 --
+
+--
+-- Contraintes pour la table `article`
+--
+ALTER TABLE `article`
+  ADD CONSTRAINT `fk_post_id_article` FOREIGN KEY (`post_id`) REFERENCES `post` (`id`);
 
 --
 -- Contraintes pour la table `comments`
