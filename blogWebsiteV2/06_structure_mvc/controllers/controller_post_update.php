@@ -21,6 +21,7 @@ if ($db){
     $posts = $sql->fetch(PDO::FETCH_ASSOC);
 }
 
+
 // echo "<pre>";
 // var_dump($posts);
 // echo "</pre>";
