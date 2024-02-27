@@ -6,9 +6,12 @@
             <img src="<?php echo $post['image']; ?>" class="" alt="<?php echo $posts['title']; ?>">
                 <div class="">
                 <h5 class=""><?php echo $post['title']; ?></h5>
-                <p class=""><?= (strlen($post['article']) > 60) ? substr($posts['article'],0,57).'...' : $post['article']; ?></p>
+                <p class=""><?= (strlen($post['description']) > 60) ? substr($posts['description'],0,57).'...' : $post['description']; ?></p>
                 <span class="badge text-bg-light">Author: <strong><?php echo $post['firstname']; ?> <?php echo $post['lastname']; ?></strong></span>
-
+                <span class="badge text-bg-light">Posted on: <strong><?= $post['created_at'] ?></strong></span>
+                <?php foreach ($existing_articles as $article): ?>
+                <p><?= $article['article'] ?></p>
+                <?php endforeach; ?>
                 
             </div>
         </div>

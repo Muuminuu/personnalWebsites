@@ -3,6 +3,11 @@
 
 <h1>Login</h1>
 
+<div class="">
+  <p>You doesn't have an account yet ?</p>
+  <a href="?page=contact" class="btn btn-success"> Click here to enlist !</a>
+  <hr class="border border-2 border-dark">
+</div>
 <?php if (isset($errors) && !empty($errors)): ?>
     <div class="alert alert-danger text-center" role="alert">
         <p> <?= $errors[0] ?> </p>

@@ -28,7 +28,7 @@
         <td><a class="btn btn-warning mb-2" href="?page=admin_post_update&id=<?= $post['id']?>)" role="button">Update</a>
         <br>
         <a class="btn btn-danger mb-2" href="javascript:deletePost(<?= $post['id']?>)" role="button">Delete</a></td>
-        <td><a class="btn btn-info" href="?page=post_update&topic=<?= $post['topic']?>" role="button">Write Article</a></td>
+        <td><a class="btn btn-info" href="?page=post_update&id=<?= $post['id']?>" role="button">Write Article</a></td>
       </tr>
     <?php endforeach; ?>
   </tbody>

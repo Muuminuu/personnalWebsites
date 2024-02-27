@@ -33,9 +33,9 @@ if(isset($_POST['email']) && isset($_POST['password']) && !empty($_POST['email']
     if($exists){
         $errors[] = "Adresse email déjà utilisée";
     }
-    echo "<pre>";
-var_dump($adress1);
-echo "</pre>";
+//     echo "<pre>";
+// var_dump($adress1);
+// echo "</pre>";
     // sil n'y a pas d'erreur on effectue l'insertion de l'utilisateur dans la bdd
     if (empty($errors)){
         $sql = $db->prepare("INSERT INTO USER (email, password) VALUES (:email, :password)");

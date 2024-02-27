@@ -1,40 +1,84 @@
 <h1>Write Articles</h1>
 <section class="container d-flex row gx-5">
     <div class= "col-6">
+
         <form action="" method="POST">
 
-        <div class="mb-3">
-            <label for="topic" class="form-label">Article concerné (topic actuel <strong><?= $posts['topic']; ?></strong>)</label>
-            <input type="text" class="form-control" id="topic" name="topic" placeholder="Topic" value="<?= $posts['topic']; ?>">
-        </div>
-        <div class="mb-3">
-            <label for="place" class="form-label">Placement dans l'article</label>
-            <input type="number" min="1" class="form-control" id="place" name="place" placeholder="Place in the article hierarchy">
-        </div>
-        <ul class="list-group list-unstyled">
-            <li>
-                <div class="mb-3 form-check">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"  checked>
+
+        <button class="btn btn-info" onclick="toggle('art_text');" type="button">Texte</button>
+        <button class=" btn btn-warning" onclick="toggle('art_image');" type="button">Image</button>
+
+            
+                <div id="art_text" class="mb-3">
+
 
                 <label for="article" class="form-label">Texte</label>
-                <textarea type="text" class="form-control" id="article" name="article" placeholder="Write something..."></textarea>
+                <textarea type="text" class="form-control" id="article" name="article" value=""></textarea>
                 </div>
-            </li>
-            <li>
-                <div class="mb-3 form-check">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+            
+            
+                <div id="art_image" class="mb-3 hidden">
+
 
                 <label for="image" class="form-label">Image</label>
-                <input type="text" value="<?= $the_post['image']; ?>" class="form-control" id="image" name="image" placeholder="Add an image url">
+                <input type="text" value="" class="form-control" id="image" name="image" placeholder="Add an image url">
                 </div>
-            </li>
-        </ul>
+                <label for="position" class="form-label">Position in the article</label>
+                <input type="number" class="form-control" id="position" name="position">
+            <button class="btn btn-success" type="submit">Add !</button>
+        <!-- </ul> -->
         
         
         </form>
     </div>
     
     <div class= "col-6">
-        <p>overview of the article</p>
+
+        <h3>overview of the article</h3>
+
+        <div class="container d-flex row">
+            <?php foreach($files_ordered as $file): ?>
+            <p class="col-6">
+            <?php if ((isset($file['image'])) && !empty($file['image'])): ?> 
+            <img class="img-thumbnail" src="<?= urldecode($file['image'])?>" alt="" />
+            <?php else: echo $file['article']; endif?>
+            </p>
+            <p class="col-6"><?= $file['position'] ?></p>
+            <button class="btn btn-warning" onclick="update('art-text')">Update</button>
+            <?php endforeach; ?>
+        </div>
+
     </div>
 </section>
+<script>
+    function toggle(ajout){
+        if(ajout === 'art_text' && document.getElementById('art_text').classList.contains('hidden')){
+            doc = document.getElementById('art_image');
+            doc.classList.toggle('hidden');
+        }
+        else if (ajout === 'art_image' && document.getElementById('art_image').classList.contains('hidden')){
+            doc = document.getElementById('art_text');
+            doc.classList.toggle('hidden');
+        }
+        else {
+            return
+        }
+        doc = document.getElementById(ajout);
+        doc.classList.toggle('hidden');
+    }
+    function update(ajout){
+        if (ajout ===true){
+            doc = document.getElementById('art_text');
+            doc.value('<?php echo $actual_article_value['article']; ?>');
+        }
+        else{
+            doc = document.getElementById('art_image');
+            doc.value('<?php echo $actual_article_value['image']; ?>');
+        }
+    }
+</script>
+<style>
+    .hidden {
+        display: none;
+    }
+</style>

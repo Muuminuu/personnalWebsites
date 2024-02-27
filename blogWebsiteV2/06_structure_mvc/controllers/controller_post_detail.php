@@ -38,6 +38,8 @@ if(isset($_POST['comment']) && !empty($_POST['comment'])){
     $commentaire = $sql->fetch(PDO::FETCH_ASSOC);
 }
 
+
+
 $existing_comments = [];
 if ($db){
    $sql = $db->prepare("SELECT comments.*, contact.firstname, contact.lastname
@@ -55,9 +57,40 @@ if ($db){
 }
 //OUIIIIIIIIIIIIIIIIII CA PUTAIN DE MAAAAAAAAAARCHE
 
-// echo "<pre>";
-// var_dump($comment);
-// echo "</pre>";
+
+
+$existing_articles = [];
+$sql = $db->prepare("SELECT article FROM article where post_id = :id");
+$sql->bindParam(':id', $id);
+$sql->execute();
+$existing_articles = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+
+
+// $existing_images = [];
+
+// $image = htmlentities(strip_tags($_POST['image']));
+
+// if(isset($_POST['image']) && !empty($_POST['image'])){
+//     $sql = $db->prepare("
+//     INSERT INTO article
+//     (post_id, , image)
+//     VALUES 
+//     (:post_id, image)");
+
+//     $sql->bindParam( ':post_id', $id );
+//     $sql->bindParam( ':image', $image );
+//     $sql->execute();
+
+// }
+
+
+
+
+
+echo "<pre>";
+var_dump($existing_image);
+echo "</pre>";
 
 
 // on charge la vue
