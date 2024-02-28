@@ -1,5 +1,9 @@
+<!-- <script>
+    function tarace(){
+        alert('test');
+    }
+</script> -->
 <?php
-
 
 if(!isset($_SESSION['user']['roles']) || !in_array('ROLE_ADMIN', json_decode($_SESSION['user']['roles']))){
     header("Location: ?page=home");
@@ -7,87 +11,53 @@ if(!isset($_SESSION['user']['roles']) || !in_array('ROLE_ADMIN', json_decode($_S
 }
 
 $id = htmlentities(strip_tags($_GET['id']));
-
-
-// echo "<pre>";
-// var_dump($id);
-// echo "</pre>";
-
 $db = connectDB();
-$posts= [];
-if ($db){
-    $sql = $db->prepare("SELECT * FROM post ORDER BY id DESC");
+if(isset($_GET['id_file'])){
+    $id_file = htmlentities(strip_tags($_GET['id_file']));
+    $sql = $db->prepare("SELECT * FROM article where id = :id");
+    $sql->bindParam(':id', $id_file);
     $sql->execute();
-    $posts = $sql->fetch(PDO::FETCH_ASSOC);
+    $fileEdit = $sql->fetch(PDO::FETCH_ASSOC);
 }
 
-$post_topic = $posts['topic'];
-// echo "<pre>";
-// var_dump($posts);
-// echo "</pre>";
-
-
-$db = connectDB();
-if(isset($_POST['article']) && !empty($_POST['article'])){
+if(isset($_POST['article']) && !empty($_POST['article']) && !isset($_GET['id_file'])){
 
     // $user_id =  $_SESSION['user']['id'];
     $article = htmlentities(strip_tags($_POST['article']));
-
-    $sql = $db->prepare("
-    INSERT INTO article
-    (post_id, article)
-    VALUES 
-    (:post_id, :article)");
-
+    $position = $_POST['position'];
+    $sql = $db->prepare(" INSERT INTO article (post_id, article, position) VALUES (:post_id, :article, :position)");
     $sql->bindParam( ':post_id', $id );
     $sql->bindParam( ':article', $article );
+    $sql->bindParam( ':position', $position );
     $sql->execute();
 }
 
+if(isset($_POST['article']) && !empty($_POST['article']) && isset($_GET['id_file'])){
 
-////
-
-
-$topics= [];
-if ($db){
-    $sql = $db->prepare("SELECT topic FROM post order by id desc");
-    // $sql->bindParam(':id', $id);
+    // $user_id =  $_SESSION['user']['id'];
+    $article = htmlentities(strip_tags($_POST['article']));
+    $position = $_POST['position'];
+    $sql = $db->prepare(" UPDATE article SET article = :article, image = '', position = :position WHERE id = :id");
+    $sql->bindParam( ':id', $id_file );
+    $sql->bindParam( ':article', $article );
+    $sql->bindParam( ':position', $position );
     $sql->execute();
-    $topics = $sql->fetchAll(PDO::FETCH_ASSOC);
+    header("Location: ?page=post_update&id=$id");
 }
-$actual_topic=[];
-if ($db){
-    $sql = $db->prepare("SELECT topic FROM post where id = :id order by id desc");
-    $sql->bindParam(':id', $id);
-    $sql->execute();
-    $actual_topic = $sql->fetch(PDO::FETCH_ASSOC);
-}
-
-
-
-// $topic_choice = $topics['topic'];
-
-// echo "<pre>";
-// var_dump($topics);
-// echo "</pre>";
-// $sql = $db->prepare("SELECT * FROM article inner join post on article.post_id = post.id where post.id = :id");
-// $sql->bindParam(':id', $id);
-// $sql->execute();
-// $article_choice = $sql->fetchAll(PDO::FETCH_ASSOC);
-
-
-// echo "<pre>";
-// var_dump($article_choice['topic']);
-// echo "</pre>";
-
-
-$text_or_image = [
-    'text',
-    'image'
-];
-
-$text= 'text';
-$image= 'image';
+// $topics= [];
+// if ($db){
+//     $sql = $db->prepare("SELECT topic FROM post order by id desc");
+//     // $sql->bindParam(':id', $id);
+//     $sql->execute();
+//     $topics = $sql->fetchAll(PDO::FETCH_ASSOC);
+// }
+// $actual_topic=[];
+// if ($db){
+//     $sql = $db->prepare("SELECT topic FROM post where id = :id order by id desc");
+//     $sql->bindParam(':id', $id);
+//     $sql->execute();
+//     $actual_topic = $sql->fetch(PDO::FETCH_ASSOC);
+// }
 
 $existing_articles = [];
 $db = connectDB();
@@ -102,29 +72,25 @@ $existing_articles = $sql->fetchAll(PDO::FETCH_ASSOC);
 // echo "</pre>";
 
 
-
-
-
-
-
-
-// envoyer url email vers bdd
-
-
-// $image = htmlentities(strip_tags($_POST['image']));
-// $image semble ne servir à rien;
-
-if(isset($_POST['image']) && !empty($_POST['image'])){
-    $sql = $db->prepare("
-    INSERT INTO article
-    (post_id, image)
-    VALUES 
-    (:post_id, :image)");
-
+if(isset($_POST['image']) && !empty($_POST['image']) && !isset($_GET['id_file'])){
+    $image = htmlentities(strip_tags($_POST['image']));
+    $position = $_POST['position'];
+    $sql = $db->prepare(" INSERT INTO article (post_id, image, position) VALUES (:post_id, :image, :position)");
     $sql->bindParam( ':post_id', $id );
     $sql->bindParam( ':image', $image );
+    $sql->bindParam( ':position', $position );
     $sql->execute();
 
+}
+if(isset($_POST['image']) && !empty($_POST['image']) && isset($_GET['id_file'])){
+    $image = htmlentities(strip_tags($_POST['image']));
+    $position = $_POST['position'];
+    $sql = $db-> prepare ("UPDATE article SET image = :image, article = '', position = :position WHERE id = :id");
+    $sql->bindParam( ':image', $image );
+    $sql->bindParam( ':id', $id_file );
+    $sql->bindParam( ':position', $position );
+    $sql->execute();
+    header("Location: ?page=post_update&id=$id");
 }
 
 // recupérer url bdd
@@ -154,10 +120,10 @@ $actual_article = $sql->fetch(PDO::FETCH_ASSOC);
 
 $actual_article_value = $actual_article['article'];
 
-echo "<pre>";
-var_dump($actual_article);
-var_dump($files_ordered);
-echo "</pre>";
+// echo "<pre>";
+// var_dump($actual_article);
+// var_dump($files_ordered);
+// echo "</pre>";
 
 
 // if(isset($_POST['title']) && isset($_POST['description']) && isset($_POST['image']) && !empty($_POST['title']) && !empty($_POST['description']) && !empty($_POST['image']) )
@@ -178,7 +144,6 @@ echo "</pre>";
     // header("Location: ?page=admin");
 
 // }
-
 
 
 

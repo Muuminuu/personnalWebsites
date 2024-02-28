@@ -7,7 +7,7 @@ if (!isset($_SESSION['user']['roles']) || !in_array("ROLE_ADMIN",json_decode($_S
 // copie conforme du code de contact, vérifier si fonctionne bien et ajouter rôle + rajout role
 if(isset($_POST['email']) && isset($_POST['password']) && !empty($_POST['email']) && !empty($_POST['password'])) {
 
-    $email = htmlentities(strip_tags($_POST['email'])); 
+    $email = inputCleaner($_POST['email']); 
     // htmlentitiestransformera en caractères alphanumériques, pour se protéger. tout ce qui n'est pas alphanumerique seront traité
     //strip_tags enlève les balises
     $password = htmlentities(strip_tags($_POST['password'])); 
@@ -37,16 +37,26 @@ if(isset($_POST['email']) && isset($_POST['password']) && !empty($_POST['email']
     if($exists){
         $errors[] = "Adresse email déjà utilisée";
     }
-    $role = htmlentities(strip_tags($_POST['role']));
-//     echo "<pre>";
-// var_dump($adress1);
-// echo "</pre>";
+    $recup_role = htmlentities(strip_tags($_POST['roles']));
+    $role = [];
+    if($recup_role === "admin"){
+        $role[] = "ROLE_ADMIN";
+        $role[] = "ROLE_MEMBER";
+        $role = json_encode($role);
+
+    }
+    else {
+        $role[] = "ROLE_MEMBER";
+        $role = json_encode($role);
+    }
+
+
     // sil n'y a pas d'erreur on effectue l'insertion de l'utilisateur dans la bdd
     if (empty($errors)){
-        $sql = $db->prepare("INSERT INTO USER (email, password, role) VALUES (:email, :password, :role)");
+        $sql = $db->prepare("INSERT INTO USER (email, password, roles) VALUES (:email, :password, :roles)");
         $sql->bindParam(':email', $email); //eviter de recevoir info directement du formulaire, enlève toutes les entités html pour les nettoyer
         $sql->bindParam(':password', $password); // ici on va le hasher !
-        $sql->bindParam(':role', $role);
+        $sql->bindParam(':roles', $role);
         $sql->execute();
         // on récupère l'identifiant de la dernière ligne insérée;
         $user_id = $db->lastInsertID();
@@ -59,14 +69,14 @@ if(isset($_POST['email']) && isset($_POST['password']) && !empty($_POST['email']
         $city = htmlentities(strip_tags($_POST['city']));
         $state = htmlentities(strip_tags($_POST['state']));
         $zip = htmlentities(strip_tags($_POST['zip']));
-        $message = htmlentities(strip_tags($_POST['message']));
+
 //décalage d'écriture entre adress1 dans bdd et address1, dans form et ce document.
 // 
         $sql = $db->prepare("
         INSERT INTO CONTACT 
-        (user_id, firstname, lastname, address1, address2, city, state, zip, message)
+        (user_id, firstname, lastname, address1, address2, city, state, zip)
         VALUES 
-        (:user_id, :firstname, :lastname, :address1, :address2, :city, :state, :zip, :message)");
+        (:user_id, :firstname, :lastname, :address1, :address2, :city, :state, :zip)");
         $sql->bindParam( ':user_id', $user_id );
         $sql->bindParam( ':firstname', $firstname);
         $sql->bindParam( ':lastname', $lastname);
@@ -75,7 +85,7 @@ if(isset($_POST['email']) && isset($_POST['password']) && !empty($_POST['email']
         $sql->bindParam( ':city', $city);
         $sql->bindParam( ':state', $state);
         $sql->bindParam( ':zip', $zip);
-        $sql->bindParam( ':message', $message);
+
 
         
         $sql->execute();

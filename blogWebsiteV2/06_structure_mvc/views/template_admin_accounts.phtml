@@ -7,29 +7,22 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th scope="col">id</th>
-      <th scope="col">Name</th>
-      <th scope="col">Topic</th>
-      <th scope="col">Title</th>
-      <th scope="col">Description</th>
-      <th scope="col">Created_at</th>
-      <th scope="col">Actions</th>
-      <th scope="col">Write Article</th>
+      <th scope="col">Id</th>
+      <th scope="col">Email</th>
+      <th scope="col">Roles</th>
+      <th scope="col">Registered_at</th>
     </tr>
   </thead>
   <tbody>
-    <?php foreach($posts as $post): ?>
+    <?php foreach($users as $user): ?>
       <tr>
-        <th scope="row"><?= $post['id'] ?></th>
-        <td><img class="thumbnail" src="<?= $post['image'] ?>" alt="<?= $post['title']?>" ></td>
-        <td><?= $post['topic'] ?></td>
-        <td><?= $post['title'] ?></td>
-        <td><?= substr ($post['description'], 0, 40) ?>...</td>
-        <td><?= $post['created_at'] ?></td>
-        <td><a class="btn btn-warning mb-2" href="?page=admin_post_update&id=<?= $post['id']?>)" role="button">Update</a>
+        <th scope="row"><?= $user['id'] ?></th>
+        <td><?= $user['email'] ?></td>
+        <td><?= $user['roles'] ?></td>
+        <td><?= $user['registered_at'] ?>...</td>
+        <td><a class="btn btn-warning mb-2" href="?page=admin_accounts_update&id=<?= $user['id']?>)" role="button">Update</a>
         <br>
-        <a class="btn btn-danger mb-2" href="javascript:deletePost(<?= $post['id']?>)" role="button">Delete</a></td>
-        <td><a class="btn btn-info" href="?page=post_update&id=<?= $post['id']?>" role="button">Write Article</a></td>
+        <a class="btn btn-danger mb-2" href="javascript:deletePost(<?= $user['id']?>)" role="button">Delete</a></td>
       </tr>
     <?php endforeach; ?>
   </tbody>

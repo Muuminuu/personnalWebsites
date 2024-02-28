@@ -1,6 +1,11 @@
 <?php
 // met dehors les ens pas admin
-if (!isset($_SESSION['user']['roles']) || !in_array("ROLE_ADMIN",json_decode($_SESSION['user']['roles']))){
+// if (!isset($_SESSION['user']['roles']) || !in_array("ROLE_ADMIN",json_decode($_SESSION['user']['roles']))){
+//     header("Location:?page=home");
+//     exit();
+// }
+//version avec function
+if (!isRole("ROLE_ADMIN")){
     header("Location:?page=home");
     exit();
 }

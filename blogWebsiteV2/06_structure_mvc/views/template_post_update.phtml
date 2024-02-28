@@ -13,7 +13,7 @@
 
 
                 <label for="article" class="form-label">Texte</label>
-                <textarea type="text" class="form-control" id="article" name="article" value=""></textarea>
+                <textarea id="article_texte" type="text" class="form-control" id="article" name="article"><?php if(isset($fileEdit)) echo $fileEdit['article']?></textarea>
                 </div>
             
             
@@ -21,10 +21,10 @@
 
 
                 <label for="image" class="form-label">Image</label>
-                <input type="text" value="" class="form-control" id="image" name="image" placeholder="Add an image url">
+                <input disabled type="text" id="article_image" value="<?php if(isset($fileEdit)) echo $fileEdit['image'] ?>" class="form-control" id="image" name="image" placeholder="Add an image url">
                 </div>
                 <label for="position" class="form-label">Position in the article</label>
-                <input type="number" class="form-control" id="position" name="position">
+                <input type="number" class="form-control" id="position" name="position" value="<?php if(isset($fileEdit)) echo $fileEdit['position'] ?>" placeholder="position">
             <button class="btn btn-success" type="submit">Add !</button>
         <!-- </ul> -->
         
@@ -44,7 +44,7 @@
             <?php else: echo $file['article']; endif?>
             </p>
             <p class="col-6"><?= $file['position'] ?></p>
-            <button class="btn btn-warning" onclick="update('art-text')">Update</button>
+            <a href='?page=post_update&id=<?= $id ?>&id_file=<?= $file['id'] ?>'><button class="btn btn-warning"  >Update</button></a>
             <?php endforeach; ?>
         </div>
 
@@ -59,23 +59,20 @@
         else if (ajout === 'art_image' && document.getElementById('art_image').classList.contains('hidden')){
             doc = document.getElementById('art_text');
             doc.classList.toggle('hidden');
+            
         }
         else {
             return
         }
+        dis = document.getElementById('article_texte');
+        dis2 = document.getElementById('article_image');
+        dis.toggleAttribute('disabled');
+        dis2.toggleAttribute('disabled');
+        console.log(dis, dis2);
         doc = document.getElementById(ajout);
         doc.classList.toggle('hidden');
     }
-    function update(ajout){
-        if (ajout ===true){
-            doc = document.getElementById('art_text');
-            doc.value('<?php echo $actual_article_value['article']; ?>');
-        }
-        else{
-            doc = document.getElementById('art_image');
-            doc.value('<?php echo $actual_article_value['image']; ?>');
-        }
-    }
+ 
 </script>
 <style>
     .hidden {

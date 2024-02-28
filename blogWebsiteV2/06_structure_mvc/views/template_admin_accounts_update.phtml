@@ -3,15 +3,15 @@
     <form class="row g-3" action="?page=admin_accounts_add" method="POST">
             <div class="col-6">
                 <label for="firstname" class="form-label">Firstname*</label>
-                <input required type="text" class="form-control" id="firstname" name="firstname">
+                <input required type="text" class="form-control" id="firstname" name="firstname" value="<?= $user['firstname']?>" 
             </div>
             <div class="col-6">
                 <label for="lastname" class="form-label">Lastname*</label>
-                <input required type="text" class="form-control" id="lastame" name="lastname">
+                <input required type="text" class="form-control" id="lastame" name="lastname" value="<?= $user['lastname']?>">
             </div>
             <div class="col-md-6">
                 <label for="email" class="form-label">Email*</label>
-                <input required type="email" class="form-control" id="email" name="email">
+                <input required type="email" class="form-control" id="email" name="email" value="<?= $user['email']?>">
             </div>
             <div class="col-md-6">
                 <label for="password" class="form-label">Password*</label>
@@ -19,20 +19,20 @@
             </div>
             <div class="col-12">
                 <label for="address1" class="form-label">Address</label>
-                <input type="text" class="form-control" id="address1" name="address1" placeholder="1234 Main St">
+                <input type="text" class="form-control" id="address1" name="address1" value="<?= $user['address1']?>">
             </div>
             <div class="col-12">
                 <label for="address2" class="form-label">Address 2</label>
-                <input type="text" class="form-control" id="address2" name="address2" placeholder="Apartment, studio, or floor">
+                <input type="text" class="form-control" id="address2" name="address2" value="<?= $user['address2']?>">
             </div>
             <div class="col-md-6">
                 <label for="city" class="form-label">City</label>
-                <input type="text" class="form-control" id="city" name="city">
+                <input type="text" class="form-control" id="city" name="city" value="<?= $user['city']?>">
             </div>
             <div class="col-md-4">
                 <label for="state" class="form-label">State</label>
                 <select id="state" name="state" class="form-select">
-                <option selected>Choose...</option>
+                <option selected>value="<?= $user['state']?>"</option>
                 <?php foreach ($state as $value): ?>
                 <option> <?= $value ?> </option>
                 <?php endforeach; ?>
@@ -40,22 +40,33 @@
             </div>
             <div class="col-md-2">
                 <label for="zip" class="form-label">Zip</label>
-                <input type="text" class="form-control" id="zip" name="zip">
+                <input type="text" class="form-control" id="zip" name="zip" value="<?= $user['zip']?>">
             </div>
             <div>
-                <legend>Roles</legend>
-                <div>
-                    <input type="radio" id="member" name="roles" value="member" checked>
-                    <label for="member">Member</label>
+                <legend>Actuals roles : <?= $user_role ?></legend>
+                <div>Want to change roles ?</div>
+                <button  onclick="toggle('button-admin')" class="btn btn-dark"></button>click here
+                <div id="button-admin">
+                    <div>
+                        <input type="radio" id="member" name="roles" value="member">
+                        <label for="member">Member</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="admin" name="roles" value="admin">
+                        <label for="admin">Admin</label>
+                    </div>
                 </div>
-                <div>
-                    <input type="radio" id="admin" name="roles" value="admin">
-                    <label for="admin">Admin</label>
-                </div>
-                
             </div>
             <div class="col-12 mb-3">
                 <button type="submit" class="btn btn-dark">Send</button>
             </div>
             </form>
+            <script>
+                      function toggle(ajout){
         
+            doc = document.getElementById('button-admin');
+            doc.classList.toggle('hidden');
+        }
+    
+            </script>
+      

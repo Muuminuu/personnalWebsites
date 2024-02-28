@@ -59,13 +59,19 @@ if ($db){
 
 
 
-$existing_articles = [];
-$sql = $db->prepare("SELECT article FROM article where post_id = :id");
+// $existing_articles = [];
+// $sql = $db->prepare("SELECT article FROM article where post_id = :id");
+// $sql->bindParam(':id', $id);
+// $sql->execute();
+// $existing_articles = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+////////////////////////////////////////////////////////
+$files_ordered = [];
+
+$sql = $db->prepare("SELECT article,image,position,id FROM article where post_id = :id order by position");
 $sql->bindParam(':id', $id);
 $sql->execute();
-$existing_articles = $sql->fetchAll(PDO::FETCH_ASSOC);
-
-
+$files_ordered = $sql->fetchAll(PDO::FETCH_ASSOC);
 
 // $existing_images = [];
 
@@ -88,9 +94,9 @@ $existing_articles = $sql->fetchAll(PDO::FETCH_ASSOC);
 
 
 
-echo "<pre>";
-var_dump($existing_image);
-echo "</pre>";
+// echo "<pre>";
+// var_dump($existing_image);
+// echo "</pre>";
 
 
 // on charge la vue

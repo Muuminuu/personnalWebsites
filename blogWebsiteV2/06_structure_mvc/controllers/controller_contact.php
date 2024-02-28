@@ -33,13 +33,14 @@ if(isset($_POST['email']) && isset($_POST['password']) && !empty($_POST['email']
     if($exists){
         $errors[] = "Adresse email déjà utilisée";
     }
-    $role = "ROLE_MEMBER";
+    $role[] = "ROLE_MEMBER";
+    $role = json_encode($role);
 //     echo "<pre>";
 // var_dump($adress1);
 // echo "</pre>";
     // sil n'y a pas d'erreur on effectue l'insertion de l'utilisateur dans la bdd
     if (empty($errors)){
-        $sql = $db->prepare("INSERT INTO USER (email, password, role) VALUES (:email, :password, :role)");
+        $sql = $db->prepare("INSERT INTO USER (email, password, roles) VALUES (:email, :password, :role)");
 
         $sql->bindParam(':email', $email); //eviter de recevoir info directement du formulaire, enlève toutes les entités html pour les nettoyer
         $sql->bindParam(':password', $password); // ici on va le hasher !

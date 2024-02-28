@@ -2,18 +2,15 @@
 <section id="gallery" class="row">
 
     <article class="">
-        <div class="">
-            <img src="<?php echo $post['image']; ?>" class="" alt="<?php echo $posts['title']; ?>">
-                <div class="">
-                <h5 class=""><?php echo $post['title']; ?></h5>
-                <p class=""><?= (strlen($post['description']) > 60) ? substr($posts['description'],0,57).'...' : $post['description']; ?></p>
-                <span class="badge text-bg-light">Author: <strong><?php echo $post['firstname']; ?> <?php echo $post['lastname']; ?></strong></span>
-                <span class="badge text-bg-light">Posted on: <strong><?= $post['created_at'] ?></strong></span>
-                <?php foreach ($existing_articles as $article): ?>
-                <p><?= $article['article'] ?></p>
-                <?php endforeach; ?>
-                
-            </div>
+        
+        <div class="container">
+            <?php foreach($files_ordered as $file): ?>
+            <p class="">
+            <?php if ((isset($file['image'])) && !empty($file['image'])): ?> 
+            <img class="img-thumbnail" src="<?= urldecode($file['image'])?>" alt="" />
+            <?php else: echo $file['article']; endif?>
+            </p>
+            <?php endforeach; ?>
         </div>
     </article>
     <div>
@@ -23,12 +20,16 @@
             <p><?= $comment['comment']?></p>
         <?php endforeach; ?>
     </div>
+    <?php if (isRole("ROLE_MEMBER")): ?>
     <form action="" method="POST">
         <div class="form-floating">
         <textarea class="form-control" placeholder="Leave a comment here" id="comment" name="comment" style="height: 100px"></textarea>
-        <label for="comment">Comments</label>
+        <label for="comment">Leave a comments</label>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
+    <?php else: ?>
+        <p>Please <a href="?page=login">login</a> to comment</p>
+    <?php endif; ?>
 
 </section>
