@@ -1,6 +1,10 @@
 <?php
-$isDone = false;
-
+// met dehors les ens pas admin
+if (!isset($_SESSION['user']['roles']) || !in_array("ROLE_ADMIN",json_decode($_SESSION['user']['roles']))){
+    header("Location:?page=home");
+    exit();
+}
+// copie conforme du code de contact, vérifier si fonctionne bien et ajouter rôle + rajout role
 if(isset($_POST['email']) && isset($_POST['password']) && !empty($_POST['email']) && !empty($_POST['password'])) {
 
     $email = htmlentities(strip_tags($_POST['email'])); 
@@ -33,14 +37,13 @@ if(isset($_POST['email']) && isset($_POST['password']) && !empty($_POST['email']
     if($exists){
         $errors[] = "Adresse email déjà utilisée";
     }
-    $role = "ROLE_MEMBER";
+    $role = htmlentities(strip_tags($_POST['role']));
 //     echo "<pre>";
 // var_dump($adress1);
 // echo "</pre>";
     // sil n'y a pas d'erreur on effectue l'insertion de l'utilisateur dans la bdd
     if (empty($errors)){
         $sql = $db->prepare("INSERT INTO USER (email, password, role) VALUES (:email, :password, :role)");
-
         $sql->bindParam(':email', $email); //eviter de recevoir info directement du formulaire, enlève toutes les entités html pour les nettoyer
         $sql->bindParam(':password', $password); // ici on va le hasher !
         $sql->bindParam(':role', $role);
@@ -77,7 +80,6 @@ if(isset($_POST['email']) && isset($_POST['password']) && !empty($_POST['email']
         
         $sql->execute();
 
-        $isDone = true;
     }      
 }
 
@@ -102,6 +104,7 @@ $state = [
     "Mayotte",
     "Réunion"
 ];
-// on charge la vue
+
 include "./views/base.phtml";
+
 ?>

@@ -1,11 +1,9 @@
 <h1>Admin Dashboard</h1>
 <p class="bg-light">Welcome to the Dashboard <span class="text-success"><strong><?= $_SESSION['user']['firstname'];?> <?= $_SESSION['user']['lastname'];?></strong></span> </p>
 
-<h2>Handle Accounts</h2>
-<p><a href="?page=admin_accounts" class="btn btn-warning">Accounts overview</a></p>
+<h2>Accounts overview</h2>
 
-<h2>Handle Posts</h2>
-<p><a class="btn btn-success" href="?page=admin_post_add" role="button">Add a new Post</a></p>
+<p><a class="btn btn-success" href="?page=admin_accounts_add" role="button">Add a new User</a></p>
 <table class="table table-striped">
   <thead>
     <tr>
