@@ -7,7 +7,7 @@ if (!isset($_SESSION['user']['roles']) || !in_array("ROLE_ADMIN",json_decode($_S
 // copie conforme du code de contact, vérifier si fonctionne bien et ajouter rôle + rajout role
 if(isset($_POST['email']) && isset($_POST['password']) && !empty($_POST['email']) && !empty($_POST['password'])) {
 
-    $email = inputCleaner($_POST['email']); 
+    $email = Utils::inputCleaner($_POST['email']); 
     // htmlentitiestransformera en caractères alphanumériques, pour se protéger. tout ce qui n'est pas alphanumerique seront traité
     //strip_tags enlève les balises
     $password = htmlentities(strip_tags($_POST['password'])); 
@@ -25,7 +25,7 @@ if(isset($_POST['email']) && isset($_POST['password']) && !empty($_POST['email']
 
     //Vérifier si l'email est dans la bdd
     // connexion à la bdd
-    $db = connectDB();
+    $db = Utils::connectDB();
     // on recherche si l'email est déjà dans la table user
     $query = $db->prepare("SELECT email FROM user WHERE email=:email"); 
     // bindParam permet de renseigner la requête afin de "protéger" le serveur SQL (contre injection)
@@ -92,7 +92,6 @@ if(isset($_POST['email']) && isset($_POST['password']) && !empty($_POST['email']
 
     }      
 }
-
 
 $state = [ 
     "Auvergne-Rhône-Alpes",

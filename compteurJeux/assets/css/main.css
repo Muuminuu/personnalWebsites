@@ -13,3 +13,13 @@ textarea .form-control {
 img.thumbnail{
     width: 100px;
 }
+/* recette magique pour un footer qui reste en bas sur petite page(moins de la taille de l'écran) et qui est normal lorsque plus long */
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  footer {
+    margin-top: auto;
+  }

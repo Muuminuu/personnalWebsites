@@ -14,7 +14,7 @@ if(isset($_POST['title']) && isset($_POST['description']) && isset($_POST['image
     $description = htmlentities(strip_tags($_POST['description']));
     $image = htmlentities(strip_tags($_POST['image']));
 
-    $db = connectDB();
+    $db = Utils::connectDB();
     $sql = $db->prepare("INSERT INTO post (user_id, title, description, image) VALUES
     (:user_id, :title, :description, :image)");
 

@@ -7,7 +7,7 @@ if (!isset($_SESSION['user']['roles']) || !in_array("ROLE_ADMIN",json_decode($_S
 
 $id = htmlentities(strip_tags($_GET['id']));
 
-$db = connectDB();
+$db = Utils::connectDB();
 $user= [];
 if ($db){
     $sql = $db->prepare("SELECT * FROM user,contact where user.id = :id");
@@ -21,9 +21,9 @@ if($user_role){
 }else{
     $user_role = 'member';
 }
-dump($user_role);
+Utils::dump($user_role);
 
-dump($user);
+Utils::dump($user);
 
 include "./views/base.phtml";
 

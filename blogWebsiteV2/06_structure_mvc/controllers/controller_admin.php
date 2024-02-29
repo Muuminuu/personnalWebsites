@@ -5,36 +5,33 @@
 //     exit();
 // }
 //version avec function
-if (!isRole("ROLE_ADMIN")){
+if (!Utils::isRole("ROLE_ADMIN")){
     header("Location:?page=home");
     exit();
 }
-
-
+require_once('./models/Post.php');
+// require_once('models/Contact.php');
+require_once('models/User.php');
 // pour chercher les posts pour créer un peu un phpmyadmin userfriendly, pour l'admin.
-$db = connectDB();
-$posts= [];
-if ($db){
-    $sql = $db->prepare("SELECT * FROM post ORDER BY id DESC");
-    $sql->execute();
-    $posts = $sql->fetchAll(PDO::FETCH_ASSOC);
-}
-
-// pour afficher le nom de l'admin connecté
-
+$post = new Post;
+$posts = $post->getAll(null);
 
 // var_dump($_SESSION); 
 $id= $_SESSION['user']['id'];
 
-$db = connectDB();
-$query = $db->prepare("SELECT * 
-                        FROM user 
-                        INNER JOIN contact 
-                        ON user.id = contact.user_id
-                        WHERE user.id=:id");  
-$query->bindParam(':id', $id);
-$query->execute();
-$actual_user = $query->fetch(PDO::FETCH_ASSOC); 
+$user_obj = new User();
+$actual_user = $user_obj->getOne($id);
+
+
+// $db = Utils::connectDB();
+// $query = $db->prepare("SELECT * 
+//                         FROM user 
+//                         INNER JOIN contact 
+//                         ON user.id = contact.user_id
+//                         WHERE user.id=:id");  
+// $query->bindParam(':id', $id);
+// $query->execute();
+// $actual_user = $query->fetch(PDO::FETCH_ASSOC); 
 // echo "<pre>";
 // var_dump($actual_user);
 // echo "</pre>";

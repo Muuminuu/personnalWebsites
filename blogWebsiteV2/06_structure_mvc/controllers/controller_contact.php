@@ -4,13 +4,9 @@ $isDone = false;
 if(isset($_POST['email']) && isset($_POST['password']) && !empty($_POST['email']) && !empty($_POST['password'])) {
 
     $email = htmlentities(strip_tags($_POST['email'])); 
-    // htmlentitiestransformera en caractères alphanumériques, pour se protéger. tout ce qui n'est pas alphanumerique seront traité
-    //strip_tags enlève les balises
     $password = htmlentities(strip_tags($_POST['password'])); 
-
     $password = password_hash($password, PASSWORD_DEFAULT);
-    // fonction password hash d ephp => hache de mdp;
-    //avec l'algorithme PASSWORD_DEFAULT;
+
 
     $errors = [];
     $exists = false;
@@ -21,7 +17,7 @@ if(isset($_POST['email']) && isset($_POST['password']) && !empty($_POST['email']
 
     //Vérifier si l'email est dans la bdd
     // connexion à la bdd
-    $db = connectDB();
+    $db = Utils::connectDB();
     // on recherche si l'email est déjà dans la table user
     $query = $db->prepare("SELECT email FROM user WHERE email=:email"); 
     // bindParam permet de renseigner la requête afin de "protéger" le serveur SQL (contre injection)

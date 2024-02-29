@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : lun. 26 fév. 2024 à 22:53
+-- Généré le : jeu. 29 fév. 2024 à 09:10
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -30,17 +30,32 @@ SET time_zone = "+00:00";
 CREATE TABLE `article` (
   `id` int(11) NOT NULL,
   `post_id` int(11) NOT NULL,
-  `article_et_image` text NOT NULL,
-  `place` int(11) NOT NULL
+  `article` text NOT NULL,
+  `image` varchar(255) NOT NULL,
+  `position` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `article`
 --
 
-INSERT INTO `article` (`id`, `post_id`, `article_et_image`, `place`) VALUES
-(1, 23, 'premier texte d\'article', 1),
-(2, 23, 'deuxieme texte d\'article', 2);
+INSERT INTO `article` (`id`, `post_id`, `article`, `image`, `position`) VALUES
+(1, 23, 'premier texte d\'article', '', 1),
+(2, 23, 'deuxieme texte d\'article', '', 2),
+(6, 23, '5eme article\r\n', '', 4),
+(7, 22, 'test sur autre article', '', 0),
+(8, 22, 'Deuxieme test article tahiti (autre)', '', 0),
+(14, 23, '', 'https://cdn.pixabay.com/photo/2024/02/07/16/15/flower-8559381_960_720.jpg', 0),
+(18, 23, '', 'https://cdn.pixabay.com/photo/2024/02/07/16/15/flower-8559381_960_720.jpg', 0),
+(19, 23, '', 'image', 3),
+(20, 23, 'dgdfdfgdfdfgdfgdfgd', '', 0),
+(21, 23, 'test thomas !', '', 7),
+(22, 23, '', 'image', 0),
+(23, 23, 'iuhhuihuihuicvbcvcvbcvcvvcbcvbcvbcvcvb', '', 0),
+(24, 23, '', 'https://cdn.pixabay.com/photo/2024/02/07/16/15/flower-8559381_960_720.jpg', 0),
+(25, 23, '', 'https://cdn.pixabay.com/photo/2023/08/21/17/44/flower-8204791_640.jpg', 0),
+(26, 22, 'C&#039;est partiiiiiiiiiiiiiiiiiii', '', 0),
+(27, 23, 'Test en cartooooooon', '', 120);
 
 -- --------------------------------------------------------
 
@@ -65,7 +80,8 @@ INSERT INTO `comments` (`id`, `user_id`, `post_id`, `comment`) VALUES
 (3, 9, 23, '5644665'),
 (4, 9, 23, '645'),
 (11, 9, 23, 'sdfsdfsdfsdfsdfsd'),
-(12, 9, 23, 'sdfsdfsdfsdfsdfsd');
+(12, 9, 23, 'sdfsdfsdfsdfsdfsd'),
+(13, 9, 22, 'fghfghfghfh');
 
 -- --------------------------------------------------------
 
@@ -92,11 +108,13 @@ CREATE TABLE `contact` (
 --
 
 INSERT INTO `contact` (`id`, `user_id`, `firstname`, `lastname`, `address1`, `address2`, `city`, `state`, `zip`, `message`, `created_at`) VALUES
-(1, 5, 'Dekpo Wyna', 'Yologaza', '2 Rue du Lavoir', '', '74150 - RUMILLY', 'Auvergne-Rh&ocirc;ne-Alpes', '74150', 'Hello les devs PHP !!!', '2024-02-21 14:29:45'),
-(2, 6, 'Dekpo Wyna', 'Yologaza', '2 Rue du Lavoir', '', '74150 - RUMILLY', 'Choose...', '74150', '', '2024-02-21 15:21:08'),
-(3, 7, 'Dekpo Gmail', 'Yologaza', '2 Rue du Lavoir', '', 'RUMILLY', 'Corse', '74150', '', '2024-02-21 15:35:16'),
-(4, 8, 'Dekpo Wyna', 'Yologaza', '2 Rue du Lavoir', '', '74150 - RUMILLY', 'Auvergne-Rh&ocirc;ne-Alpes', '74150', '', '2024-02-22 08:18:13'),
-(5, 9, 'ok', 'ok', 'ok', 'ok', 'ok', 'Corse', 'ok', '', '2024-02-24 20:22:21');
+(1, 9, 'okokokok', 'okok', 'okok', 'ok', 'okok', 'Corse', 'ok', 'Hello les devs PHP !!!', '2024-02-21 14:29:45'),
+(11, 14, 'admin', 'admin', 'admin', 'admin', 'admin', 'Grand Est', 'admin', '', '2024-02-28 09:47:33'),
+(12, 15, 'user', 'user', 'user', 'user', 'user', 'Centre-Val de Loire', 'user', '', '2024-02-28 09:47:58'),
+(13, 16, 'testcontact', 'testcontact', 'testcontact', 'testcontact', 'testcontact', 'Corse', 'testcontact', 'testcontact', '2024-02-28 09:49:53'),
+(14, 17, 'yip', 'yip', 'yip', 'yip', 'yip', 'Guadeloupe', 'yip', 'yip', '2024-02-28 10:04:44'),
+(15, 18, 'yop', 'yop', 'yop', 'yop', 'yop', 'Normandie', 'yop', '', '2024-02-28 10:05:51'),
+(16, 19, 'yp', 'yp', 'yp', 'yp', 'yp', 'Nouvelle-Aquitaine', 'yp', '', '2024-02-28 10:06:27');
 
 -- --------------------------------------------------------
 
@@ -110,7 +128,6 @@ CREATE TABLE `post` (
   `title` varchar(80) NOT NULL,
   `topic` varchar(80) NOT NULL,
   `description` varchar(255) NOT NULL,
-  `article` text NOT NULL,
   `image` text NOT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -119,9 +136,9 @@ CREATE TABLE `post` (
 -- Déchargement des données de la table `post`
 --
 
-INSERT INTO `post` (`id`, `user_id`, `title`, `topic`, `description`, `article`, `image`, `created_at`) VALUES
-(22, 9, 'Voyage &agrave; Tahiti', 'tahiti', '', 'our trip to tahiti!', 'https://cdn.pixabay.com/photo/2015/03/18/21/20/moorea-680033_960_720.jpg', '2024-02-25 22:42:40'),
-(23, 9, 'test', 'test1', 'rtertertert', 'okokok!!', 'https://cdn.pixabay.com/photo/2015/03/18/21/20/moorea-680033_960_720.jpg', '2024-02-26 06:21:11');
+INSERT INTO `post` (`id`, `user_id`, `title`, `topic`, `description`, `image`, `created_at`) VALUES
+(22, 9, 'Voyage &agrave; Tahiti', 'tahiti', '', 'https://cdn.pixabay.com/photo/2015/03/18/21/20/moorea-680033_960_720.jpg', '2024-02-25 22:42:40'),
+(23, 9, 'test', 'test1', 'rtertertert', 'https://cdn.pixabay.com/photo/2015/03/18/21/20/moorea-680033_960_720.jpg', '2024-02-26 06:21:11');
 
 -- --------------------------------------------------------
 
@@ -142,11 +159,13 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `email`, `password`, `roles`, `registered_at`) VALUES
-(5, 'dekpo@me.com', '$2y$10$m8a9JOxwYncQaN1pP126MemmU2Uuh4U2E4F5laI3.d/3pC6WaghT2', '[\"ROLE_ADMIN\",\"ROLE_MEMBER\"]', '2024-02-21 14:29:45'),
-(6, 'dw.yologaza@gmail.com', '$2y$10$5XqlJxiRx6wVLBu3YXZRIuRLAO9t6E.sms9WOJNP7z1c6fop5LkIe', '[]', '2024-02-21 15:21:08'),
-(7, 'dw.yologaza@wanadoo.fr', '$2y$10$xIxrwv4.SN6HCZVDYZT95.Q/1uUrf.PZCZslGSH6aAM0DBKGxLu8y', '[]', '2024-02-21 15:35:16'),
-(8, 'dekpo@icloud.com', '$2y$10$m8a9JOxwYncQaN1pP126MemmU2Uuh4U2E4F5laI3.d/3pC6WaghT2', '[]', '2024-02-22 08:18:13'),
-(9, 'ok@ok.com', '$2y$10$f15wED7XfAqaZTDzGp9iFORTpuo4dh2O2F8WhxE6CSHNmsC9CleOe', '[\"ROLE_ADMIN\",\"ROLE_MEMBER\"]', '2024-02-24 20:22:21');
+(9, 'ok@ok.com', '$2y$10$f15wED7XfAqaZTDzGp9iFORTpuo4dh2O2F8WhxE6CSHNmsC9CleOe', '[\"ROLE_ADMIN\",\"ROLE_MEMBER\"]', '2024-02-24 20:22:21'),
+(14, 'admin@admin.com', '$2y$10$26AKEwwpi.uPCtsfNvDrs.5nbX3XSLdBqqxufWBTJ4J8h3PLgfOLW', '[\"ROLE_ADMIN\",\"ROLE_MEMBER\"]', '2024-02-28 09:47:33'),
+(15, 'user@user.com', '$2y$10$vX1k/tZoi2JR1tcCQg49XONYTWHPVcu.8EyR41glyaQCuvaDaDeYK', '[\"ROLE_MEMBER\"]', '2024-02-28 09:47:58'),
+(16, 'testcontact@testcontact.com', '$2y$10$PgBlZAvVeIse..Ois2qr0uSnJqXnmBpwS868hrmbyviacQICnETBO', '[\"ROLE_MEMBER\"]', '2024-02-28 09:49:53'),
+(17, 'yip@yip.com', '$2y$10$/JNTE3LJ5W3RbfJfVSTDT.U3uFJTUlKWwKFBmi7f03Tye.kVvdyIa', '[\"ROLE_MEMBER\"]', '2024-02-28 10:04:44'),
+(18, 'yop@yop.com', '$2y$10$8H8wWzGx1SkEUpPzNYCwN.Jmqsj2jnIDGLKrKlkP5k4zMtKzISykG', '[\"ROLE_ADMIN\",\"ROLE_MEMBER\"]', '2024-02-28 10:05:51'),
+(19, 'yp@yp.com', '$2y$10$Ix2YM6LrLUyXvdlLNRsenOUN0GwwhzOuY0gq0l.XbP7NakLLrv8X6', '[\"ROLE_MEMBER\"]', '2024-02-28 10:06:27');
 
 --
 -- Index pour les tables déchargées
@@ -194,19 +213,19 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT pour la table `article`
 --
 ALTER TABLE `article`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT pour la table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT pour la table `contact`
 --
 ALTER TABLE `contact`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT pour la table `post`
@@ -218,7 +237,7 @@ ALTER TABLE `post`
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- Contraintes pour les tables déchargées

@@ -1,18 +1,18 @@
 <?php
 
-if (!isRole("ROLE_ADMIN")){
+if (!Utils::isRole("ROLE_ADMIN")){
     header("Location:?page=home");
     exit();
 }
 $id= $_SESSION['user']['id'];
 
-$db = connectDB();
+$db = Utils::connectDB();
 $query = $db->prepare("SELECT * 
                         FROM games ");  
 $query->execute();
 $games = $query->fetchAll(PDO::FETCH_ASSOC); 
 
-dump($games);
+Utils::dump($games);
 
 
 

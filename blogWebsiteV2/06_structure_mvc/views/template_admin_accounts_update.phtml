@@ -1,4 +1,4 @@
-<h1>Add a new User</h1>
+<h1>Update user</h1>
     <section id="accounts"></section>
     <form class="row g-3" action="?page=admin_accounts_add" method="POST">
             <div class="col-6">
@@ -12,10 +12,6 @@
             <div class="col-md-6">
                 <label for="email" class="form-label">Email*</label>
                 <input required type="email" class="form-control" id="email" name="email" value="<?= $user['email']?>">
-            </div>
-            <div class="col-md-6">
-                <label for="password" class="form-label">Password*</label>
-                <input required type="password" class="form-control" id="password" name="password">
             </div>
             <div class="col-12">
                 <label for="address1" class="form-label">Address</label>
@@ -32,7 +28,7 @@
             <div class="col-md-4">
                 <label for="state" class="form-label">State</label>
                 <select id="state" name="state" class="form-select">
-                <option selected>value="<?= $user['state']?>"</option>
+                <option selected><?= $user['state']?></option>
                 <?php foreach ($state as $value): ?>
                 <option> <?= $value ?> </option>
                 <?php endforeach; ?>
@@ -45,8 +41,7 @@
             <div>
                 <legend>Actuals roles : <?= $user_role ?></legend>
                 <div>Want to change roles ?</div>
-                <button  onclick="toggle('button-admin')" class="btn btn-dark"></button>click here
-                <div id="button-admin">
+                <div>
                     <div>
                         <input type="radio" id="member" name="roles" value="member">
                         <label for="member">Member</label>

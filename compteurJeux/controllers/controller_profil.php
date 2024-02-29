@@ -9,7 +9,7 @@ if (!isset($_SESSION['user']['roles']) || !in_array("ROLE_MEMBER",json_decode($_
 $id= $_SESSION['user']['id'];
 
 
-$db = connectDB();
+$db = Utils::connectDB();
 if($db){
     $query = $db->prepare("SELECT * FROM user INNER JOIN user_detail ON user.id = user_detail.user_id WHERE user.id=:id");  
     $query->bindParam(':id', $id);
@@ -48,7 +48,7 @@ function profilUpdate (){
     $city = htmlentities(strip_tags($_POST['city']));
     $zip = htmlentities(strip_tags($_POST['zip']));
 
-    $db=connectDB();
+    $db=Utils::connectDB();
     $user_id = $_SESSION['user']['id'];
     $sql = $db->prepare("UPDATE user SET email=:email WHERE id=:id");
     $sql->bindParam(':email', $email);

@@ -11,7 +11,7 @@ if(isset($_POST['email']) && isset($_POST['password']) && !empty($_POST['email']
     $email = htmlentities(strip_tags($_POST['email']));
     $password = htmlentities(strip_tags($_POST['password']));
 
-    $db = connectDB();
+    $db = Utils::connectDB();
     $query = $db->prepare("SELECT user.*,user_detail.lastname,user_detail.firstname FROM user,user_detail  WHERE email=:email AND user.id=user_detail.user_id"); 
     $query->bindParam(':email', $email);
     $query->execute();

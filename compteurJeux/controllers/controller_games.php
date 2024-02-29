@@ -1,7 +1,7 @@
 <?php
 // ma logique de controller
 //;port=3306
-// $db = connectDB();
+// $db = Utils::connectDB();
 // if($db){ // comprendre : si elle est vraie, true
 //     $sql = $db->prepare("SELECT * FROM ??????? ORDER BY id LIMIT 3 "); // prepare requete
 //     $sql->execute();//execute

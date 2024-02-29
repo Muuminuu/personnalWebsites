@@ -13,7 +13,7 @@ if(isset($_POST['email']) && isset($_POST['password']) && !empty($_POST['email']
         $errors[] = "Veuillez renseigner une adresse email valide svp";
     }
 
-    $db = connectDB();
+    $db = Utils::connectDB();
     $query = $db->prepare("SELECT email FROM user WHERE email=:email"); 
     $query->bindParam(':email', $email);
     $query->execute();

@@ -10,7 +10,7 @@ if(!isset($_SESSION['user']['roles']) || !in_array('ROLE_ADMIN', json_decode($_S
 
 
 $post_id = (int)$_GET['id']; // transtypage, pour paser d'un type à un autre
-$db = connectDB();
+$db = Utils::connectDB();
 $sql = $db->prepare("SELECT * FROM post WHERE id=$post_id"); 
 //$sql->bindParam(':id', $post_id);
 // plutot utiliser un bind param

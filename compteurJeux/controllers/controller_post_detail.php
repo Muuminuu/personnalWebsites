@@ -11,7 +11,7 @@ $id = htmlentities(strip_tags($_GET['id']));
 // var_dump($comment);
 // echo "</pre>";
 
-$db = connectDB();
+$db = Utils::connectDB();
 $post = [];
 if ($db){
    $sql = $db->prepare("SELECT post.*,contact.firstname,contact.lastname FROM post,contact WHERE post.user_id=contact.user_id AND post.id=:id ORDER BY id DESC");
@@ -22,7 +22,7 @@ if ($db){
    // var_dump( $posts );
 }
 
-$db = connectDB();
+$db = Utils::connectDB();
 if(isset($_POST['comment']) && !empty($_POST['comment'])){
     $user_id =  $_SESSION['user']['id'];
     $comment = htmlentities(strip_tags($_POST['comment']));

@@ -11,7 +11,7 @@ if(!isset($_SESSION['user']['roles']) || !in_array('ROLE_ADMIN', json_decode($_S
 }
 
 $id = htmlentities(strip_tags($_GET['id']));
-$db = connectDB();
+$db = Utils::connectDB();
 if(isset($_GET['id_file'])){
     $id_file = htmlentities(strip_tags($_GET['id_file']));
     $sql = $db->prepare("SELECT * FROM article where id = :id");
@@ -60,7 +60,7 @@ if(isset($_POST['article']) && !empty($_POST['article']) && isset($_GET['id_file
 // }
 
 $existing_articles = [];
-$db = connectDB();
+$db = Utils::connectDB();
 $sql = $db->prepare("SELECT article FROM article where post_id = :id"); 
 $sql->bindParam(':id', $id);
 // // plutot utiliser un bind param

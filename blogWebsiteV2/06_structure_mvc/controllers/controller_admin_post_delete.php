@@ -10,7 +10,7 @@ $post_id = (int)$_GET['id'];
 
 
 
-$db = connectDB();
+$db = Utils::connectDB();
 // $posts= [];
 // $post est il nécessaire vu qu'existant dans autre page ?
 if ($db){

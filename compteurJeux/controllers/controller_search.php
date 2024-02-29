@@ -1,6 +1,6 @@
 <?php
 // ma logique de controller
-$db = connectDB();
+$db = Utils::connectDB();
 //trim pour enlever espaces avant et apres / urldecode pour comprendre les caractères speciaux /
 //strig_tags pour enlever balise et proteger contre code malicieux
 $keywords = strip_tags(urldecode(trim($_GET['keywords'])));

@@ -5,7 +5,7 @@
 //     exit();
 // }
 //version avec function
-if (!isRole("ROLE_ADMIN")){
+if (!Utils::isRole("ROLE_ADMIN")){
     header("Location:?page=home");
     exit();
 }
@@ -26,7 +26,7 @@ if (!isRole("ROLE_ADMIN")){
 // var_dump($_SESSION); 
 $id= $_SESSION['user']['id'];
 
-$db = connectDB();
+$db = Utils::connectDB();
 $query = $db->prepare("SELECT * 
                         FROM user 
                         INNER JOIN user_detail 

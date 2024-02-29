@@ -5,7 +5,7 @@ if (!isset($_SESSION['user']['roles']) || !in_array("ROLE_ADMIN",json_decode($_S
     exit();
 }
 
-$db = connectDB();
+$db = Utils::connectDB();
 $users= [];
 if ($db){
     $sql = $db->prepare("SELECT * FROM user");
@@ -13,7 +13,7 @@ if ($db){
     $users = $sql->fetchAll(PDO::FETCH_ASSOC);
 }
 
-dump($users);
+Utils::dump($users);
 
 include "./views/base.phtml";
 
