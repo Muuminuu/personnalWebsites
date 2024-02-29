@@ -1,0 +1,18 @@
+<h1>Search Result(s) for <?= $keywords ?></h1>
+
+<section id="search" class="row">
+    <?php 
+    foreach($posts as $search): ?> 
+    <!-- $search, ici pourrait être n'importe quoi. -->
+    <article class="col-12 col-md-4 col-sm-6 mb-3">
+        <div class="card">
+            <img src="<?php echo $search['image']; ?>" class="card-img-top" alt="<?= $search['title'] ?>">
+                <div class="card-body">
+                <h5 class="card-title"><?php echo $search['title']; ?></h5>
+                <p class="card-text"><?= (strlen($search['description']) > 60) ? substr($search['description'],0,57).'...' : $search['description']; ?></p>
+                <a href="#" class="btn btn-dark">Lire l'article en entier</a>
+            </div>
+        </div>
+    </article>
+<?php endforeach; ?>
+</section>

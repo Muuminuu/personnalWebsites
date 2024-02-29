@@ -1,0 +1,40 @@
+<h1>Profil</h1>
+<h3>Bienvenue sur votre page de profil <strong class="text-info"><?= $actual_user['firstname']?> <?= $actual_user['lastname'] ?></strong></h3>
+<form class="row g-3" action="?page=profil" method="POST">
+        <!-- <div>
+            <label for="avatar" class="form-label">Avatar</label>
+            <input type="img" class="form-control" id="avatar" name="avatar" value="<?= $actual_user['avatar'] ?>">
+        </div> -->
+        <div class="col-6">
+            <label for="firstname" class="form-label">Firstname</label>
+            <input required type="text" class="form-control" id="firstname" name="firstname" value="<?= $actual_user['firstname'] ?>">
+        </div>
+        <div class="col-6">
+            <label for="lastname" class="form-label">Lastname</label>
+            <input required type="text" class="form-control" id="lastame" name="lastname" value="<?= $actual_user['lastname'] ?>">
+        </div>
+        <div class="col-md-6">
+            <label for="email" class="form-label">Email</label>
+            <input required type="email" class="form-control" id="email" name="email" value="<?= $actual_user['email'] ?>">
+        </div>
+        <!-- <div class="col-md-6">
+            <label for="password" class="form-label">Password</label>
+            <input required type="password" class="form-control" id="password" name="password">
+        </div> -->
+        <div class="col-12">
+            <label for="country" class="form-label">Country</label>
+            <input type="text" class="form-control" id="country" name="country" value="<?= $actual_user['country'] ?>">
+        </div>
+        <div class="col-md-6">
+            <label for="city" class="form-label">City</label>
+            <input type="text" class="form-control" id="city" name="city" value="<?= $actual_user['city'] ?>">
+        </div>
+        <div class="col-md-2">
+            <label for="zip" class="form-label">Zip</label>
+            <input type="text" class="form-control" id="zip" name="zip" value="<?= $actual_user['zip'] ?>">
+        </div>
+        <div class="col-12 mb-3">
+            <button type="submit" name="submit" class="btn btn-dark">Update my profil</button>
+        </div>
+        
+</form>

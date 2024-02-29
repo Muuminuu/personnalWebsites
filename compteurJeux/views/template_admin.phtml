@@ -1,0 +1,54 @@
+<h1>Admin Dashboard</h1>
+<p class="bg-light">Welcome to the Dashboard <span class="text-success"><strong><?= $_SESSION['user']['firstname'];?> <?= $_SESSION['user']['lastname'];?></strong></span> </p>
+
+<h2>Handle Games</h2>
+<p><a class="btn btn-success" href="?page=admin_games" role="button">Add a new Game</a></p>
+
+<h2>Handle Accounts</h2>
+<p><a href="?page=admin_accounts" class="btn btn-warning">Accounts overview</a></p>
+
+<h2>Handle Posts</h2>
+<p><a class="btn btn-success" href="?page=admin_post_add" role="button">Add a new Post</a></p>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">Name</th>
+      <th scope="col">Topic</th>
+      <th scope="col">Title</th>
+      <th scope="col">Description</th>
+      <th scope="col">Created_at</th>
+      <th scope="col">Actions</th>
+      <th scope="col">Write Article</th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php foreach($posts as $post): ?>
+      <tr>
+        <th scope="row"><?= $post['id'] ?></th>
+        <td><img class="thumbnail" src="<?= $post['image'] ?>" alt="<?= $post['title']?>" ></td>
+        <td><?= $post['topic'] ?></td>
+        <td><?= $post['title'] ?></td>
+        <td><?= substr ($post['description'], 0, 40) ?>...</td>
+        <td><?= $post['created_at'] ?></td>
+        <td><a class="btn btn-warning mb-2" href="?page=admin_post_update&id=<?= $post['id']?>)" role="button">Update</a>
+        <br>
+        <a class="btn btn-danger mb-2" href="javascript:deletePost(<?= $post['id']?>)" role="button">Delete</a></td>
+        <td><a class="btn btn-info" href="?page=post_update&id=<?= $post['id']?>" role="button">Write Article</a></td>
+      </tr>
+    <?php endforeach; ?>
+  </tbody>
+</table>
+<p><a class="btn btn-success" href="?page=admin_post_add" role="button">Add a new Post</a></p>
+<script>
+  function deletePost(id){
+    const question = window.confirm("Are you sure to delete the post "+id+" ?");
+    if (question) {
+      location.href="?page=admin_post_delete&id="+id;
+    }
+  }
+
+  function updatePost(id){
+      location.href="?page=admin_post_update&id="+id;
+  }
+</script>

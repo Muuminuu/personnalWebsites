@@ -1,0 +1,11 @@
+<h1>Games</h1>
+<?php foreach($games as $game): ?>
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title"><?= $game['name'] ?></h5>
+          <p class="card-text"><?= (strlen($game['description']) > 60) ? substr($game['description'],0,57).'...' : $game['description']; ?></p>
+          <a href="?page=admin_games_update&id=<?= $game['id'] ?>" class="btn btn-warning">Update</a>
+          <a href="?page=admin_games_delete&id=<?= $game['id'] ?>" class="btn btn-danger">Delete</a>
+        </div>
+    </div>
+<?php endforeach; ?>

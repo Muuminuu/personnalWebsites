@@ -1,0 +1,65 @@
+<h1>contact</h1>
+<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti facilis, adipisci inventore saepe quos molestias aspernatur perspiciatis debitis minima libero odio necessitatibus architecto hic at animi vel distinctio aperiam dignissimos.</p>
+<section id="contact">
+    <?php if (isset($errors) && !empty($errors)): ?>
+        <?php foreach ($errors as $error): ?>
+                <div class="alert alert-danger" role="alert">
+                    <?= $error; ?>
+                </div>
+        <?php endforeach; ?>
+    <?php endif; ?>
+
+     <?php if ($isDone): ?>
+        <div class="alert alert-success" role="alert">
+            <p>Le compte <?=$email ?> a été créé avec succès</p>
+            <p>Vous pouvez <a href="?page=login">vous connecter</a></p>
+        </div>
+        
+
+    <?php else: ?>
+
+        <form class="row g-3" action="?page=contact" method="POST">
+        <div class="col-6">
+            <label for="firstname" class="form-label">Firstname*</label>
+            <input required type="text" class="form-control" id="firstname" name="firstname">
+        </div>
+        <div class="col-6">
+            <label for="lastname" class="form-label">Lastname*</label>
+            <input required type="text" class="form-control" id="lastame" name="lastname">
+        </div>
+        <div class="col-md-6">
+            <label for="email" class="form-label">Email*</label>
+            <input required type="email" class="form-control" id="email" name="email">
+        </div>
+        <div class="col-md-6">
+            <label for="password" class="form-label">Password*</label>
+            <input required type="password" class="form-control" id="password" name="password">
+        </div>
+        <div class="col-12">
+            <label for="country" class="form-label">Country</label>
+            <input type="text" class="form-control" id="country" name="country" placeholder="ex: France">
+        </div>
+        <div class="col-md-6">
+            <label for="city" class="form-label">City</label>
+            <input type="text" class="form-control" id="city" name="city">
+        </div>
+        <div class="col-md-2">
+            <label for="zip" class="form-label">Zip</label>
+            <input type="text" class="form-control" id="zip" name="zip">
+        </div>
+        <div class="col-12">
+            <div class="form-check">
+            <input required class="form-check-input" type="checkbox" id="accepted" name="accepted">
+            <label class="form-check-label" for="accepted">
+                I accept the private policy
+            </label>
+            </div>
+        </div>
+        <div class="col-12 mb-3">
+            <button type="submit" class="btn btn-dark">Send</button>
+        </div>
+        </form>
+    
+    <?php endif; ?>
+
+</section>
