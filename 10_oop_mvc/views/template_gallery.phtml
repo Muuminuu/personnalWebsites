@@ -1,0 +1,24 @@
+<h1>test</h1>
+<pre>
+    <?php var_dump($data); ?>
+</pre>
+
+
+<section id="gallery" class="row">
+    <?php 
+
+    foreach($posts as $article): ?>
+    <article class="col-12 col-md-4 col-sm-6 mb-3">
+        <div class="card">
+            <img src="<?php echo $article['image']; ?>" class="card-img-top" alt="image d'une campagne française">
+                <div class="card-body">
+                <h5 class="card-title"><?php echo $article['title']; ?></h5>
+                <p class="card-text"><?= (strlen($article['description']) > 60) ? substr($article['description'],0,57).'...' : $article['description']; ?></p>
+                <span class="badge text-bg-light">Author: <strong><?php echo $article['firstname']; ?> <?php echo $article['lastname']; ?></strong></span>
+                <a href="?page=post_detail&id=<?php echo $article['id']; ?>" class="btn btn-dark">Lire l'article en entier</a>
+                
+            </div>
+        </div>
+    </article>
+<?php endforeach; ?>
+</section>

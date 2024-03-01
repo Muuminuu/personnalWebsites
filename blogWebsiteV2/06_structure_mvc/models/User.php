@@ -11,12 +11,13 @@ class User {
     public function getAll($nb=null,$query="SELECT * FROM user ORDER BY id DESC "){
         $limit = !is_null($nb) ? " LIMIT ".$nb : "";
         // pas necessaire par notre PDO a un die(); mais pas précaution on le met.
-
         $users = [];
         $users = $this->db->selectAll($query.$limit);
         return $users;
     }
 
+
+    // ne sert pas encore. A virer si pas besoin.
     public function getOne($id){
         $user = $this->db->select('SELECT * FROM user WHERE id=:id',[
             'id' => $id

@@ -11,16 +11,18 @@ if (!Utils::isRole("ROLE_ADMIN")){
 }
 require_once('./models/Post.php');
 // require_once('models/Contact.php');
-require_once('models/User.php');
+// require_once('models/User.php');
 // pour chercher les posts pour créer un peu un phpmyadmin userfriendly, pour l'admin.
 $post = new Post;
 $posts = $post->getAll(null);
 
 // var_dump($_SESSION); 
-$id= $_SESSION['user']['id'];
+// $id= $_SESSION['user']['id'];
 
-$user_obj = new User();
-$actual_user = $user_obj->getOne($id);
+// Tout le code qui suit ne SERT PAS !!!!!!!
+
+// $user_obj = new User();
+// $actual_user = $user_obj->getOne($id);
 
 
 // $db = Utils::connectDB();
@@ -32,6 +34,7 @@ $actual_user = $user_obj->getOne($id);
 // $query->bindParam(':id', $id);
 // $query->execute();
 // $actual_user = $query->fetch(PDO::FETCH_ASSOC); 
+
 // echo "<pre>";
 // var_dump($actual_user);
 // echo "</pre>";

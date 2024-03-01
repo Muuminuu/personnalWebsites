@@ -1,5 +1,9 @@
 <?php
-require_once('./services/class/Database.php');
+
+namespace App\Models;
+use App\Services\Database;
+
+
 class Post {
     //propriété $db pour stocker PDO
     private $db;
@@ -18,16 +22,18 @@ class Post {
     }
 
     public function getOne($id){
-        $user = $this->db->select('SELECT * FROM user WHERE id=:id',[
+        $user = $this->db->select('SELECT * FROM post WHERE id=:id',[
             'id' => $id
         ]);
         return $user;
     }
 
-    public function insertPost($title,$description,$id){
-        $query = "INSERT INTO post (title, description,  user_id) VALUES (:title, :description, :user_id)";
+    public function insertPost($title,$topic,$image,$description,$id){
+        $query = "INSERT INTO post (title, topic, image, description,  user_id) VALUES (:title, :topic, :image, :description, :user_id)";
         $params = [
             'title' => $title,
+            'topic' => $topic,
+            'image' => $image,
             'content' => $description,
             'user_id' => $id
         ];

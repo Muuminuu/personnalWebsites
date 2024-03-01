@@ -1,0 +1,81 @@
+<h1>Write Articles</h1>
+<section class="container d-flex row gx-5">
+    <div class= "col-6">
+
+        <form action="" method="POST">
+
+
+        <button class="btn btn-info" onclick="toggle('art_text');" type="button">Texte</button>
+        <button class=" btn btn-warning" onclick="toggle('art_image');" type="button">Image</button>
+
+            
+                <div id="art_text" class="mb-3">
+
+
+                <label for="article" class="form-label">Texte</label>
+                <textarea id="article_texte" type="text" class="form-control" id="article" name="article"><?php if(isset($fileEdit)) echo $fileEdit['article']?></textarea>
+                </div>
+            
+            
+                <div id="art_image" class="mb-3 hidden">
+
+
+                <label for="image" class="form-label">Image</label>
+                <input disabled type="text" id="article_image" value="<?php if(isset($fileEdit)) echo $fileEdit['image'] ?>" class="form-control" id="image" name="image" placeholder="Add an image url">
+                </div>
+                <label for="position" class="form-label">Position in the article</label>
+                <input type="number" class="form-control" id="position" name="position" value="<?php if(isset($fileEdit)) echo $fileEdit['position'] ?>" placeholder="position">
+            <button class="btn btn-success" type="submit">Add !</button>
+        <!-- </ul> -->
+        
+        
+        </form>
+    </div>
+    
+    <div class= "col-6">
+
+        <h3>overview of the article</h3>
+
+        <div class="container d-flex row">
+            <?php foreach($files_ordered as $file): ?>
+            <p class="col-6">
+            <?php if ((isset($file['image'])) && !empty($file['image'])): ?> 
+            <img class="img-thumbnail" src="<?= urldecode($file['image'])?>" alt="" />
+            <?php else: echo $file['article']; endif?>
+            </p>
+            <p class="col-6"><?= $file['position'] ?></p>
+            <a href='?page=post_update&id=<?= $id ?>&id_file=<?= $file['id'] ?>'><button class="btn btn-warning"  >Update</button></a>
+            <?php endforeach; ?>
+        </div>
+
+    </div>
+</section>
+<script>
+    function toggle(ajout){
+        if(ajout === 'art_text' && document.getElementById('art_text').classList.contains('hidden')){
+            doc = document.getElementById('art_image');
+            doc.classList.toggle('hidden');
+        }
+        else if (ajout === 'art_image' && document.getElementById('art_image').classList.contains('hidden')){
+            doc = document.getElementById('art_text');
+            doc.classList.toggle('hidden');
+            
+        }
+        else {
+            return
+        }
+        dis = document.getElementById('article_texte');
+        dis2 = document.getElementById('article_image');
+        dis.toggleAttribute('disabled');
+        dis2.toggleAttribute('disabled');
+        console.log(dis, dis2);
+        doc = document.getElementById(ajout);
+        doc.classList.toggle('hidden');
+    }
+ 
+</script>
+<style>
+    .hidden {
+        display: none;
+    }
+</style>

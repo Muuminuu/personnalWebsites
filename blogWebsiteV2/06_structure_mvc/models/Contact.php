@@ -1,4 +1,6 @@
 <?php
+
+//Vu avec Adam :  est bien nécessaire ? vu que je ne l'appelle que lorsque j'appelle user ? faire une requete ave user et join contact semble suffisant.
 require_once('./services/class/Database.php');
 class Contact {
     //propriété $db pour stocker PDO

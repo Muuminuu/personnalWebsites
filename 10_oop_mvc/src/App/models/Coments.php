@@ -1,6 +1,10 @@
 <?php
-require_once('./services/class/Database.php');
-class Post {
+
+namespace App\Models;
+use App\Services\Database;
+
+
+class Coments {
     //propriété $db pour stocker PDO
     private $db;
 
@@ -8,17 +12,17 @@ class Post {
         $this->db = new Database();
         // c'est PDO !
     }
-    public function getAll($nb=null,$query="SELECT * FROM post ORDER BY id DESC "){
+    public function getAll($nb=null,$query="SELECT * FROM comnents ORDER BY id DESC "){
         $limit = !is_null($nb) ? " LIMIT ".$nb : "";
         // pas necessaire par notre PDO a un die(); mais pas précaution on le met.
 
-        $posts = [];
-        $posts = $this->db->selectAll($query.$limit);
-        return $posts;
+        $comments = [];
+        $comments = $this->db->selectAll($query.$limit);
+        return $comments;
     }
 
     public function getOne($id){
-        $user = $this->db->select('SELECT * FROM user WHERE id=:id',[
+        $user = $this->db->select('SELECT * FROM comnents WHERE id=:id',[
             'id' => $id
         ]);
         return $user;
