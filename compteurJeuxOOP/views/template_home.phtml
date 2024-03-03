@@ -1,19 +1,10 @@
-<?php $member = $data['member']; ?>
 <?php $posts = $data['posts']; ?>
-
-<?php if($member){
-  $u_firstname = $data['u_firstname'];
-  $u_lastname = $data['u_lastname'];
-} ?>
 
 
 <h1><?= CONFIG_SITE_TITLE?></h1>
-  
-    <?php if ($member) :?>
-      <p>Welcome dear <span class="text-success"><strong>
-      <?= $u_firstname;?> <?= $u_lastname;?></strong></span> !</p>
-    <?php endif; ?>
-
+<?php if (App\Services\Utils::isRole("ROLE_ADMIN")): ?>
+  <p>Welcome dear <span class="text-success"><strong><?= $_SESSION['user']['firstname'];?> <?= $_SESSION['user']['lastname'];?></strong></span> !</p>
+<?php endif; ?>
 <!-- carousel dynamique -->
 <div id="carouselExampleCaptions" class="carousel slide">
   <div class="carousel-indicators">

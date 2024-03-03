@@ -4,7 +4,7 @@ namespace App\Models;
 use App\Services\Database;
 
 
-class Article {
+class Contact {
     //propriété $db pour stocker PDO
     private $db;
 
@@ -27,14 +27,19 @@ class Article {
         ]);
         return $user;
     }
-    
-    //fonction à ajuster ?
-    public function insertPost($title,$description,$id){
-        $query = "INSERT INTO post (title, description,  user_id) VALUES (:title, :description, :user_id)";
+
+    public function insertContact($user_id,$firstname,$lastname,$address1,$address2,$city,$state,$zip,$message){
+        $query = "INSERT INTO contact (user_id, firstname, lastname, address1, address2, city, state, zip, message) VALUES (:user_id, :firstname, :lastname, :address1, :address2, :city, :state, :zip, :message)";
         $params = [
-            'title' => $title,
-            'content' => $description,
-            'user_id' => $id
+            'user_id' => $user_id,
+            'firstname' => $firstname,
+            'lastname' => $lastname,
+            'address1' => $address1,
+            'address2' => $address2,
+            'city' => $city,
+            'state' => $state,
+            'zip' => $zip,
+            'message' => $message
         ];
         $insert =$this->db->query($query,$params);
         return $insert;

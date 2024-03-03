@@ -25,15 +25,15 @@ $posts = $post->getAll(null);
 // $actual_user = $user_obj->getOne($id);
 
 
-// $db = Utils::connectDB();
-// $query = $db->prepare("SELECT * 
-//                         FROM user 
-//                         INNER JOIN contact 
-//                         ON user.id = contact.user_id
-//                         WHERE user.id=:id");  
-// $query->bindParam(':id', $id);
-// $query->execute();
-// $actual_user = $query->fetch(PDO::FETCH_ASSOC); 
+$db = Utils::connectDB();
+$query = $db->prepare("SELECT * 
+                        FROM user 
+                        INNER JOIN contact 
+                        ON user.id = contact.user_id
+                        WHERE user.id=:id");  
+$query->bindParam(':id', $id);
+$query->execute();
+$actual_user = $query->fetch(PDO::FETCH_ASSOC); 
 
 // echo "<pre>";
 // var_dump($actual_user);

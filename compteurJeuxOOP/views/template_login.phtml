@@ -1,10 +1,7 @@
-<?php $title = $data['title'] ?>
-<?php $errors = $data['errors'] ?>
-<?php $user = $data['user'] ?>
 
 <section id="login">
 
-<h1><?= $title ?></h1>
+<h1>Login</h1>
 
 <div class="">
   <p>You doesn't have an account yet ?</p>
@@ -13,7 +10,7 @@
 </div>
 <?php if (isset($errors) && !empty($errors)): ?>
     <div class="alert alert-danger text-center" role="alert">
-        <p> <?= $errors ?> </p>
+        <p> <?= $errors[0] ?> </p>
     </div>
 <?php endif; ?>
 <?php if (!isset($_SESSION['user'])): ?>
@@ -22,6 +19,7 @@
   <div class="mb-3">
     <label for="email" class="form-label">Email address</label>
     <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp">
+    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
   </div>
   <div class="mb-3">
     <label for="password" class="form-label">Password</label>

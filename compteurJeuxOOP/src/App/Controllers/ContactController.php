@@ -26,17 +26,37 @@ if(isset($_POST['email']) && isset($_POST['password']) && !empty($_POST['email']
     $user->getOne(null);
 
     var_dump($user);
-
+    //Vérifier si l'email est dans la bdd
+    // connexion à la bdd
+    // $db = Utils::connectDB();
+    // on recherche si l'email est déjà dans la table user
+    // $query = $db->prepare("SELECT email FROM user WHERE email=:email"); 
+    // // bindParam permet de renseigner la requête afin de "protéger" le serveur SQL (contre injection)
+    // $query->bindParam(':email', $email);
+    // $query->execute();
+    // // fetchColumn cible un résultat uniquement (on ne veut qu'un seul résultat pour arrêter la requête)
+    // $exists = $query->fetchColumn(); //false si aucun résultat n'est trouvé ?
+    // error si existe déjà dans la bdd
     if($exists){
         $errors[] = "Adresse email déjà utilisée";
     }
     $role[] = "ROLE_MEMBER";
     $role = json_encode($role);
-
+//     echo "<pre>";
+// var_dump($adress1);
+// echo "</pre>";
+    // sil n'y a pas d'erreur on effectue l'insertion de l'utilisateur dans la bdd
     if (empty($errors)){
         $user = new User();
         $u=$user->insertUser($email, $password, $role);
+        
+        // $sql = $db->prepare("INSERT INTO USER (email, password, roles) VALUES (:email, :password, :role)");
 
+        // $sql->bindParam(':email', $email); //eviter de recevoir info directement du formulaire, enlève toutes les entités html pour les nettoyer
+        // $sql->bindParam(':password', $password); // ici on va le hasher !
+        // $sql->bindParam(':role', $role);
+        // $sql->execute();
+        // // on récupère l'identifiant de la dernière ligne insérée;
         $user_id = $u->lastInsertId();
 
         $firstname = htmlentities(strip_tags($_POST['firstname']));
@@ -54,6 +74,21 @@ $contact = new Contact();
 $contact->insertContact($user_id, $firstname, $lastname,
 $address1, $address2, $city, $state, $zip, $message);
 
+        // $sql = $db->prepare("
+        // INSERT INTO CONTACT 
+        // (user_id, firstname, lastname, address1, address2, city, state, zip, message)
+        // VALUES 
+        // (:user_id, :firstname, :lastname, :address1, :address2, :city, :state, :zip, :message)");
+        // $sql->bindParam( ':user_id', $user_id );
+        // $sql->bindParam( ':firstname', $firstname);
+        // $sql->bindParam( ':lastname', $lastname);
+        // $sql->bindParam( ':address1', $address1);
+        // $sql->bindParam( ':address2', $address2);
+        // $sql->bindParam( ':city', $city);
+        // $sql->bindParam( ':state', $state);
+        // $sql->bindParam( ':zip', $zip);
+        // $sql->bindParam( ':message', $message);
+        // $sql->execute();
 
         $isDone = true;
     }      
@@ -79,7 +114,8 @@ $state = [
     "Mayotte",
     "Réunion"
 ];
-        $template = './views/template_contact.phtml';
+
+        $template = './Views/template_contact.phtml';
         $this->render($template,['title'=>$title, 'isDone'=>$isDone,'state'=>$state, 'email'=>$email, 'errors'=>$errors]); // on va injecter nos variables dans ce tableau 
     }
 

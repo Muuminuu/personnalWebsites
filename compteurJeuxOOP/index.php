@@ -6,8 +6,6 @@ use App\Services\Router;
 require_once 'autoload.php'; 
 require_once 'config.php';
 
-session_start();
-
 $router = new Router();
 $page = $router->getPage();
 

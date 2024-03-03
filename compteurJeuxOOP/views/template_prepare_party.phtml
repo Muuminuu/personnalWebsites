@@ -1,0 +1,13 @@
+<h1>Péparation de la partie</h1>
+
+<h2>Choisissez le nombre de joueurs</h2>
+<label for="players" class="form-label" >Nombre de Joueurs</label>
+<select class="form-select" name="players" id="players">
+    <option selected>Choisissez</option>
+    <?php foreach ($players as $value): ?>
+    <option> <?= $value ?> </option>
+    <?php endforeach; ?>
+</select>
+
+
+<a href="templateParty&players=<?= $value ?>"></a>

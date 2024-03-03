@@ -4,7 +4,7 @@ namespace App\Models;
 use App\Services\Database;
 
 
-class Article {
+class Coments {
     //propriété $db pour stocker PDO
     private $db;
 
@@ -12,23 +12,22 @@ class Article {
         $this->db = new Database();
         // c'est PDO !
     }
-    public function getAll($nb=null,$query="SELECT * FROM article ORDER BY id DESC "){
+    public function getAll($nb=null,$query="SELECT * FROM comnents ORDER BY id DESC "){
         $limit = !is_null($nb) ? " LIMIT ".$nb : "";
         // pas necessaire par notre PDO a un die(); mais pas précaution on le met.
 
-        $articles = [];
-        $articles = $this->db->selectAll($query.$limit);
-        return $articles;
-    }  
+        $comments = [];
+        $comments = $this->db->selectAll($query.$limit);
+        return $comments;
+    }
 
     public function getOne($id){
-        $user = $this->db->select('SELECT * FROM article WHERE id=:id',[
+        $user = $this->db->select('SELECT * FROM comnents WHERE id=:id',[
             'id' => $id
         ]);
         return $user;
     }
-    
-    //fonction à ajuster ?
+
     public function insertPost($title,$description,$id){
         $query = "INSERT INTO post (title, description,  user_id) VALUES (:title, :description, :user_id)";
         $params = [

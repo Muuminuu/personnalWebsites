@@ -29,53 +29,6 @@ class User {
         return $user;
     }
 
-    public function login($email, $password) {
-        // Select user from the database based on the provided email
-        $user = $this->db->select('SELECT * FROM user WHERE email=:email', [
-            'email' => $email,
-        ]);
-    
-        // Check if a user with the provided email exists
-        if (!$user) {
-            return "User not found.";
-        }
-    
-        // Verify the password
-        if (!password_verify($password, $user['password'])) {
-            return "Invalid password.";
-        }
-    
-        // Return the user data if login is successful
-        return $user;
-    }
-
-
-    public function getId(){
-        if(isset($_SESSION)){
-            $id = $_SESSION['user']['id'];
-        return $id;
-        }
-    }
-    
-    public function getUser($id) {
-        try {
-            // Select user information along with their contact information
-            $u = $this->db->select('SELECT * FROM user INNER JOIN contact ON user.id = contact.user_id WHERE user.id=:id', [
-                'id' => $id
-            ]);
-            
-            // Check if any data was retrieved
-            if (!$u) {
-                return "User not found.";
-            }
-    
-            return $u;
-        } catch (Exception $e) {
-            return "Error fetching user data: " . $e->getMessage();
-        }
-    }
-
-
     // public function getOne($id){
     //     $user = $this->db->select('SELECT * FROM user WHERE id=:id',[
     //         'id' => $id

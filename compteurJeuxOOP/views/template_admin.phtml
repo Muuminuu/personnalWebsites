@@ -1,9 +1,5 @@
-<?php $title = $data['title']; ?>
-<?php $posts = $data['posts']; ?>
-<?php $user = $data['user']; ?>
-
 <h1>Admin Dashboard</h1>
-<p class="bg-light">Welcome to the Dashboard <span class="text-success"><strong><?= $user['firstname'];?> <?= $user['lastname'];?></strong></span> </p>
+<p class="bg-light">Welcome to the Dashboard <span class="text-success"><strong><?= $_SESSION['user']['firstname'];?> <?= $_SESSION['user']['lastname'];?></strong></span> </p>
 
 <h2>Handle Accounts</h2>
 <p><a href="?page=admin_accounts" class="btn btn-warning">Accounts overview</a></p>
