@@ -2,7 +2,7 @@
 <h1><?= CONFIG_SITE_TITLE?></h1>
 <h2><?= $title ?></h2>
   
-    <?php if ($member) :?>
+    <?php if (isset($_SESSION['user'])) :?>
       <p>Welcome dear <span class="text-success"><strong>
       <?= $u_firstname;?> <?= $u_lastname;?></strong></span> !</p>
     <?php endif; ?>

@@ -10,10 +10,18 @@ class HomeController extends AbstractController
         $title = "Hello OOP world";
         $dbPost = new PostManager();
         $posts = $dbPost->getAll(3);
+        //version si on est pas loggé
+        $user = false;
+        if (isset($_SESSION['user'])) {
+            $user = $_SESSION['user'];
+        };
+        
         $template = './views/template_home.phtml';
         $this->render($template,[
             "title"=>$title,
-            "posts"=>$posts]);
+            "posts"=>$posts,
+            'user' =>$user
+        ]);
         }
 
         public function new(){

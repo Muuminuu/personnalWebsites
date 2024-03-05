@@ -1,0 +1,42 @@
+
+
+<section id="login">
+
+<h1><?= $title ?></h1>
+
+<div class="">
+  <p>You doesn't have an account yet ?</p>
+  <a href="?page=contact" class="btn btn-success"> Click here to enlist !</a>
+  <hr class="border border-2 border-dark">
+</div>
+<?php if (isset($errors) && !empty($errors)): ?>
+    <div class="alert alert-danger text-center" role="alert">
+        <p> <?= $errors ?> </p>
+    </div>
+<?php endif; ?>
+<?php if (!isset($_SESSION['user'])): ?>
+
+<form method="POST" action="?page=login">
+  <div class="mb-3">
+    <label for="email" class="form-label">Email address</label>
+    <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp">
+  </div>
+  <div class="mb-3">
+    <label for="password" class="form-label">Password</label>
+    <input type="password" name="password" class="form-control" id="password">
+  </div>
+  <div class="mb-3 form-check">
+    <input type="checkbox" class="form-check-input" id="remember_me" name="remember_me">
+    <label class="form-check-label" for="remember_me">Check me out</label>
+  </div>
+  <button type="submit" class="btn btn-dark mb-3">Sign In</button>
+</form>
+<?php else : ?>
+    <div class="alert alert-info text-center" role="alert">
+        <p> Vous êtes déja connecté avec le compte <?= $_SESSION['user']['email'] ?>. </p>
+        <!--On fait cela au cas ou l'utilisateur est redirigé vers cette page sans être déconnecté -->
+    </div>
+<?php endif; ?>
+
+</section>
+

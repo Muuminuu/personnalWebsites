@@ -1,11 +1,10 @@
 
 <h1><?= CONFIG_SITE_TITLE?></h1>
   
-    <?php if ($member) :?>
+    <?php if (isset($_SESSION['user']) && !$user) :?>
       <p>Welcome dear <span class="text-success"><strong>
-      <?= $u_firstname;?> <?= $u_lastname;?></strong></span> !</p>
+      <?= $user['firstname'];?> <?= $user['lastname'];?></strong></span> !</p>
     <?php endif; ?>
-
 <!-- carousel dynamique -->
 <div id="carouselExampleCaptions" class="carousel slide">
   <div class="carousel-indicators">

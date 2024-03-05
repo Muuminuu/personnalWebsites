@@ -30,8 +30,13 @@ abstract class AbstractTable
         $filter = ['id','className'];
         $class = get_class_vars($this->getClassName());//recupère les attributs d'une classe
         foreach($class as $k => $v){
-            if(!in_array($k, $filter))$attributes[$k] = $v;
+            if(!in_array($k, $filter))$attributes[] = $k;
         }
+        // ici correction avec Adam, autrefois c'était
+        // if(!in_array($k, $filter))$attributes[$k] = $v;
+        // ce qui renvoyait une valeurnull, soit rien du tout n'était transféré vers abstract maanger.
+        //Tandis que maintenant, es champss ont passés et directement utilisés par l'abstract Manager
+        // insert into (email, password, roles) VALUES (bla, bli, blou)
         return $attributes;
     }
 

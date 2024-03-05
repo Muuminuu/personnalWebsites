@@ -2,13 +2,12 @@
 namespace App\Controllers;
 
 use App\Models\UserManager;
-use App\Models\PostManager;
+
 use App\Controllers\AbstractController;
 use App\Services\Authenticator;
 
-//gère la redirection si pas le role souhaité
-class AdminController extends AbstractController {
-
+class AdminAccountsController extends AbstractController 
+{
     public function __construct() {
         if(!Authenticator::isRole("ROLE_ADMIN")){
             header('Location: ?page=home'); // sera login quand on aura une page admin ???
@@ -18,15 +17,13 @@ class AdminController extends AbstractController {
         //On ne veut pas que tous les controlleurs redirigent les gens. Seulement
     }
     public function index() {
-        $p = new PostManager();
-        $posts = $p->getAll();
+        $u = new UserManager();
+        $users = $u->getAll();
 
-        $template = './views/template_admin.phtml';
+        $template = './views/template_admin_accounts.phtml';
         $this->render($template, [
         'title' => 'Welcome to the Admin Dashboard',
-        'posts' => $posts,
-        'user' => $_SESSION['user'],
+        'users' => $users,
         ]);
     }
-    
 }

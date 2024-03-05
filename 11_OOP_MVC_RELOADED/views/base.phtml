@@ -39,7 +39,7 @@
         
         <!-- <?php if (isset($_SESSION['user']['roles']) && in_array("ROLE_ADMIN",json_decode($_SESSION['user']['roles']))): ?> -->
             <!-- rmettre le code plus haut et virer utils si pas de solution. remettre en service le endif -->
-            <?php if (App\Services\Utils::isRole("ROLE_ADMIN")) ?>
+            <?php if ($auth::isRole("ROLE_ADMIN")) ?>
                 <li><a class="dropdown-item" href="?page=admin">Admin</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li><a href="?page=profil" class="dropdown-item">Profil</a></li>

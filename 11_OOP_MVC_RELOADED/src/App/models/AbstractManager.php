@@ -26,6 +26,14 @@ abstract class AbstractManager
         return $row;
     }
 
+    public function getOne ($query=null,$params=[]){
+        $default_query = "SELECT * FROM ".self::$tableName." LIMIT 1";
+        $sql_query = $query===null ? $default_query : $query;
+        $row = [];
+        $row = self::$db->select($sql_query,$params);
+        return $row;
+    }
+
     public function insert ($data = [])
     {
         $fields = self::$obj->getAttributes();
@@ -36,7 +44,29 @@ abstract class AbstractManager
         // insert INTO user (email, password, roles) VALUES (?, ?, ?)
         $str_fields = implode(',', $fields);
         $str_values = implode (',', $values);
-        $insert = self::$db->query("INSERT INTO ".self::$tableName." (".$str_fields.") VALUES (".$str_values.")", $data);
+
+        $query = "INSERT INTO ".self::$tableName." (".$str_fields.") VALUES (".$str_values.")";
+
+        $insert = self::$db->query($query, $data);
+        
+        return $insert;    
     }
-    
+
+    public function delete($id = null){
+        if(!is_null($id)){
+            self::$db->query("DELETE FROM ".self::$tableName." WHERE id=?",[$id]);
+            return true;
+        }
+        return false;
+    }
+
+    public function update($id = null, $data = []){
+        $fields = self::$obj->getAttributes();
+        foreach ($fields as $k => $v){ //email=?, password=?, roles=?
+            $values[] = $v."=?"; 
+        }
+        $str_values = implode(',', $values);
+        $update = self::$db->query("UPDATE ".self::$tableName." SET ".$str_values." WHERE id='".$id."'",$data);
+        return $update;
+    }
 }
