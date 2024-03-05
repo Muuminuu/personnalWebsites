@@ -6,7 +6,7 @@ use App\Models\CommentsManager;
 use App\Models\PostManager;
 use App\Models\UserManager;
 use App\Services\Authenticator;
-
+use App\Services\Utils;
 
 class AdminPostController extends AbstractController{
     public function __construct() {
@@ -49,12 +49,23 @@ class AdminPostController extends AbstractController{
     {
         $post_id = (int)$_GET['id'];
         $manager = new PostManager();
+        if(isset($_POST['title']) && isset($_POST['description']) && isset($_POST['image']) && !empty($_POST['title']) && !empty($_POST['description']) && !empty($_POST['image'])) {
+            $title = Utils::inputCleaner($_POST['title']);
+            $description = Utils::inputCleaner($_POST['description']);
+            $image = Utils::inputCleaner($_POST['image']);
+            $update = $manager->update($post_id, [
+                $_SESSION['user']['id'],
+                $title,
+                $description,
+                $image
+            ]);
+        }
         $post = $manager->getOneById($post_id);
         $template = './views/template_admin_post_update.phtml';
         $this->render($template, [
             'post' => $post,
             'post_id' => $post_id,
-            
+
         ]);
     }
 
