@@ -29,15 +29,15 @@
         <td><?= $post['title'] ?></td>
         <td><?= substr ($post['description'], 0, 40) ?>...</td>
         <td><?= $post['created_at'] ?></td>
-        <td><a class="btn btn-warning mb-2" href="?page=adminpost=update&id=<?= $post['id']?>)" role="button">Update</a>
+        <td><a class="btn btn-warning mb-2" href="?page=adminpost&action=update&id=<?= $post['id']?>)" role="button">Update</a>
         <br>
         <a class="btn btn-danger mb-2" href="javascript:deletePost(<?= $post['id']?>)" role="button">Delete</a></td>
-        <td><a class="btn btn-info" href="?page=postupdate&id=<?= $post['id']?>" role="button">Write Article</a></td>
+        <td><a class="btn btn-info" href="?page=post_article_update&id=<?= $post['id']?>" role="button">Write Article</a></td>
       </tr>
     <?php endforeach; ?>
   </tbody>
 </table>
-<p><a class="btn btn-success" href="?page=adminpostadd" role="button">Add a new Post</a></p>
+<p><a class="btn btn-success" href="?page=adminpost" role="button">Add a new Post</a></p>
 <script>
   function deletePost(id){
     const question = window.confirm("Are you sure to delete the post "+id+" ?");

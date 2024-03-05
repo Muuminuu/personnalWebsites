@@ -1,12 +1,13 @@
 <?php
 namespace App\Controllers;
 
-use App\Controllers\AbstractController;
-use App\Models\CommentsManager;
+use App\Services\Utils;
 use App\Models\PostManager;
+use App\Models\CommentsManager;
+
 use App\Models\UserManager;
 use App\Services\Authenticator;
-use App\Services\Utils;
+use App\Controllers\AbstractController;
 
 class AdminPostController extends AbstractController{
     public function __construct() {
@@ -20,7 +21,7 @@ class AdminPostController extends AbstractController{
 
     public function index() {
 
-        $template = './views/template_admin_post.phtml';
+        $template = './views/template_admin_post_add.phtml';
         $this->render($template, [
 
         ]);
@@ -28,10 +29,8 @@ class AdminPostController extends AbstractController{
 
     public function create() {
 
-        $template = './views/template_admin_post_add.phtml';
-        $this->render($template, [
 
-        ]);
+        ;
     }
     public function delete() {
 

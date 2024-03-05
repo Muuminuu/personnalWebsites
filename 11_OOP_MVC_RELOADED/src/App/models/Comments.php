@@ -29,5 +29,20 @@ class Comments extends AbstractTable
         ];
         return $commentArray;
     }
+
+    // public function getCreatedAt(): ?string
+    // {
+    //     return $this->created_at;
+    // }
+
+    // /**
+    //  * Set the value of created_at
+    //  */
+    // public function setCreatedAt(?string $created_at): self
+    // {
+    //     $this->created_at = $created_at;
+
+    //     return $this;
+    // }
 }
 

@@ -10,7 +10,7 @@
                 <div class="card-body">
                 <h5 class="card-title"><?php echo $search['title']; ?></h5>
                 <p class="card-text"><?= (strlen($search['description']) > 60) ? substr($search['description'],0,57).'...' : $search['description']; ?></p>
-                <a href="#" class="btn btn-dark">Lire l'article en entier</a>
+                <a href="?page=postdetail&id=<?php echo $article['id']; ?>" class="btn btn-dark">Lire l'article en entier</a>
             </div>
         </div>
     </article>
