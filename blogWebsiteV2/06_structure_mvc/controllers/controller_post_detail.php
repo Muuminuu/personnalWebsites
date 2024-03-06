@@ -1,9 +1,9 @@
 <?php
 
-if (!isset($_SESSION['user']['roles']) || !in_array("ROLE_ADMIN",json_decode($_SESSION['user']['roles']))){
-    header("Location:?page=home");
-    exit();
-}
+// if (!isset($_SESSION['user']['roles']) || !in_array("ROLE_ADMIN",json_decode($_SESSION['user']['roles']))){
+//     header("Location:?page=home");
+//     exit();
+// }
 // ma logique de controller
 $id = htmlentities(strip_tags($_GET['id']));
 

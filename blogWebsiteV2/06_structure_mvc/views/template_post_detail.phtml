@@ -1,5 +1,9 @@
-<h1>Page de Détail</h1>
+<h1>Post #<?= $post['id'] ?></h1>
+<h2>Titre du post: <?= $post['title'] ?></h2>
 <section id="gallery" class="row">
+<?php if (isset($_SESSION['user']['roles']) && in_array("ROLE_ADMIN",json_decode($_SESSION['user']['roles']))):?>
+    <a href="?page=post_update&id=<?= $id ?>"><button class='btn btn-primary'> Go back to edit</button></a>
+<?php endif; ?>
 
     <article class="">
         

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : lun. 04 mars 2024 à 16:58
+-- Généré le : mer. 06 mars 2024 à 16:14
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -40,22 +40,17 @@ CREATE TABLE `article` (
 --
 
 INSERT INTO `article` (`id`, `post_id`, `article`, `image`, `position`) VALUES
-(1, 23, 'premier texte d\'article', '', 1),
-(2, 23, 'deuxieme texte d\'article', '', 2),
+(1, 23, 'premier texte d&#039;article!', '', 1),
 (6, 23, '5eme article\r\n', '', 4),
-(7, 22, 'test sur autre article', '', 0),
-(8, 22, 'Deuxieme test article tahiti (autre)', '', 0),
-(14, 23, '', 'https://cdn.pixabay.com/photo/2024/02/07/16/15/flower-8559381_960_720.jpg', 0),
-(18, 23, '', 'https://cdn.pixabay.com/photo/2024/02/07/16/15/flower-8559381_960_720.jpg', 0),
-(19, 23, '', 'image', 3),
-(20, 23, 'dgdfdfgdfdfgdfgdfgd', '', 0),
-(21, 23, 'test thomas !', '', 7),
+(7, 22, 'Premier voyage &agrave; l&#039;archipel des Tuamotu', '', 0),
+(8, 22, 'Deuxieme test article tahiti (autre)', '', 2),
 (22, 23, '', 'https://cdn.pixabay.com/photo/2023/11/29/21/05/animal-8420313_640.jpg', 10),
-(23, 23, 'iuhhuihuihuicvbcvcvbcvcvvcbcvbcvbcvcvb', '', 0),
-(24, 23, '', 'https://cdn.pixabay.com/photo/2024/02/07/16/15/flower-8559381_960_720.jpg', 0),
 (25, 23, '', 'https://cdn.pixabay.com/photo/2023/08/21/17/44/flower-8204791_640.jpg', 0),
-(26, 22, 'C&#039;est partiiiiiiiiiiiiiiiiiii', '', 0),
-(27, 23, 'Test en cartooooooon', '', 120);
+(26, 22, 'C&#039;est partiiiiiiiiiiiiiiiiiii', '', 3),
+(27, 23, 'Test en cartooooooon', '', 120),
+(29, 23, 'Voici un z&egrave;bre', '', 12),
+(30, 22, '', 'https://media.istockphoto.com/id/873654064/fr/photo/teahatea-fakarava-fran%C3%A7ais-polyn%C3%A9sie-atoll-beach.webp?s=1024x1024&amp;w=is&amp;k=20&amp;c=A6iuJx4RKF-WgwcsJBA-4mkXpg6zQXSEGrOSwkBdUq8=', 1),
+(31, 22, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates dolorum velit, tempora in alias excepturi non aliquid, asperiores recusandae quae vero ab quibusdam harum? Mollitia quisquam enim nemo quibusdam debitis.', '', 4);
 
 -- --------------------------------------------------------
 
@@ -75,13 +70,12 @@ CREATE TABLE `comments` (
 --
 
 INSERT INTO `comments` (`id`, `user_id`, `post_id`, `comment`) VALUES
-(1, 9, 23, '5644665'),
-(2, 9, 23, '5644665'),
-(3, 9, 23, '5644665'),
-(4, 9, 23, '645'),
-(11, 9, 23, 'sdfsdfsdfsdfsdfsd'),
-(12, 9, 23, 'sdfsdfsdfsdfsdfsd'),
-(13, 9, 22, 'fghfghfghfh');
+(1, 9, 23, 'joli !'),
+(2, 9, 23, 'C\'est beau !'),
+(3, 9, 23, 'C\'est un zèbre'),
+(4, 9, 23, 'Sacré test !'),
+(11, 9, 23, 'Voici un commentaire !'),
+(19, 9, 22, 'Ia Orana !! Salut les amis !');
 
 -- --------------------------------------------------------
 
@@ -108,7 +102,7 @@ CREATE TABLE `contact` (
 --
 
 INSERT INTO `contact` (`id`, `user_id`, `firstname`, `lastname`, `address1`, `address2`, `city`, `state`, `zip`, `message`, `created_at`) VALUES
-(1, 9, 'okokokok', 'okok', 'okok', 'ok', 'okok', 'Corse', 'ok', 'Hello les devs PHP !!!', '2024-02-21 14:29:45'),
+(1, 9, 'Untel', 'Inconnu', 'okok', 'ok', 'okok', 'Corse', 'ok', 'Hello les devs PHP !!!', '2024-02-21 14:29:45'),
 (11, 14, 'admin', 'admin', 'admin', 'admin', 'admin', 'Grand Est', 'admin', '', '2024-02-28 09:47:33'),
 (12, 15, 'user', 'user', 'user', 'user', 'user', 'Centre-Val de Loire', 'user', '', '2024-02-28 09:47:58'),
 (13, 16, 'testcontact', 'testcontact', 'testcontact', 'testcontact', 'testcontact', 'Corse', 'testcontact', 'testcontact', '2024-02-28 09:49:53'),
@@ -126,7 +120,12 @@ INSERT INTO `contact` (`id`, `user_id`, `firstname`, `lastname`, `address1`, `ad
 (25, 30, 'cla', 'cla', 'cla', 'cla', 'cla', 'Provence Alpes C&ocirc;te d&rsquo;A', 'cla', 'cla', '2024-03-04 09:27:48'),
 (27, 32, 'iop', 'iop', 'iop', 'iop', 'iop', 'Guadeloupe', 'iop', 'iop', '2024-03-04 09:38:55'),
 (28, 33, 'pok', 'pok', 'pok', 'pok', 'pok', 'Normandie', 'pok', 'pok', '2024-03-04 10:31:57'),
-(29, 34, 'users', 'users', 'users', 'users', 'users', 'Occitanie', 'users', 'users', '2024-03-04 10:37:30');
+(29, 34, 'users', 'users', 'users', 'users', 'users', 'Occitanie', 'users', 'users', '2024-03-04 10:37:30'),
+(30, 35, 'utilisateur', 'utilisateur', 'utilisateur', 'utilisateur', 'utilisateur', 'Guadeloupe', 'utilisateur', 'utilisateur', '2024-03-05 12:07:23'),
+(31, 36, 'blouuu', 'blouuu', 'blouuu', 'blouuu', 'blouuu', 'Provence Alpes C&ocirc;te d&rsquo;A', 'blouuu', 'blouuu', '2024-03-05 12:15:38'),
+(32, 38, 'ghj', 'ghj', 'ghj', 'ghj', 'ghj', 'Provence Alpes C&ocirc;te d&rsquo;A', 'ghj', '', '2024-03-05 13:50:55'),
+(33, 39, 'ko', 'ko', 'ko', 'ko', 'ko', 'Guyane', 'ko', '', '2024-03-05 13:55:34'),
+(34, 40, 'hjkl', 'hjkl', 'hjkl', 'hjkl', 'hjkl', 'Provence Alpes C&ocirc;te d&rsquo;A', 'hjkl', '', '2024-03-05 15:52:30');
 
 -- --------------------------------------------------------
 
@@ -150,8 +149,8 @@ CREATE TABLE `post` (
 --
 
 INSERT INTO `post` (`id`, `user_id`, `title`, `topic`, `description`, `image`, `created_at`, `updated_at`) VALUES
-(22, 9, 'Voyage &agrave; Tahiti', 'tahiti', '', 'https://cdn.pixabay.com/photo/2015/03/18/21/20/moorea-680033_960_720.jpg', '2024-02-25 22:42:40', '2024-03-04 14:52:38'),
-(23, 9, 'test', 'test1', 'rtertertert', 'https://cdn.pixabay.com/photo/2015/03/18/21/20/moorea-680033_960_720.jpg', '2024-02-26 06:21:11', '2024-03-04 14:52:38');
+(22, 9, 'Voyage &agrave; Tahiti', 'tahiti', 'Voyage a Tahiti', 'https://cdn.pixabay.com/photo/2015/03/18/21/20/moorea-680033_960_720.jpg', '2024-02-25 22:42:40', '2024-03-04 14:52:38'),
+(23, 9, 'Randonn&eacute;e', 'test1', 'Montagne', 'https://cdn.pixabay.com/photo/2023/09/29/07/50/rocks-8283171_640.jpg', '2024-02-26 06:21:11', '2024-03-04 14:52:38');
 
 -- --------------------------------------------------------
 
@@ -193,7 +192,13 @@ INSERT INTO `user` (`id`, `email`, `password`, `roles`, `registered_at`) VALUES
 (31, 'ok@ok.com', '$2y$10$Li6O2hWBQOu4sf6O5I.o5efw8Y1wYq8mWCeuv/rNzP0JV/0UM91f2', '[\"ROLE_MEMBER\"]', '2024-03-04 09:30:12'),
 (32, 'iop@iop.com', '$2y$10$dl9LYalGWeA6Cvk1bMKvmugjj5o1a2SZLtkbNDTYaUVvIDZ7ADHkW', '[\"ROLE_MEMBER\"]', '2024-03-04 09:38:55'),
 (33, 'pok@pok.com', '$2y$10$5i9XheNcaV3d54B/r2mAY.qMnDe3Zq5EsJGDbyUg1FUYs1EiY5CqS', '[\"ROLE_MEMBER\"]', '2024-03-04 10:31:57'),
-(34, 'users@users.com', '$2y$10$x9IGkktWo/5eIzSd2ckSgeqwqWCpXwX7mZQm3WQFx0JUNYa1c/ly2', '[\"ROLE_MEMBER\"]', '2024-03-04 10:37:30');
+(34, 'users@users.com', '$2y$10$x9IGkktWo/5eIzSd2ckSgeqwqWCpXwX7mZQm3WQFx0JUNYa1c/ly2', '[\"ROLE_MEMBER\"]', '2024-03-04 10:37:30'),
+(35, 'utilisateur@utilisateur.com', '$2y$10$UuX7GAXqgbLVlW3SKMhVIu0jl/FGbvE/uQUNjjY8420NVtj4Ac4Yy', '[\"ROLE_MEMBER\"]', '2024-03-05 12:07:23'),
+(36, 'blouuu@blouuu.com', '$2y$10$umswYWUUOeNB0lpMLlMDc.y/FDqRMkpWZqR1AmkrhmaIbta44hYOW', '[\"ROLE_MEMBER\"]', '2024-03-05 12:15:38'),
+(37, 'ghj@ghj.com', '$2y$10$dNIwbZ9m13AHzrn4.GLmpuvdDUjZbVez7Atpd6zSMh6G3RRaVyx5i', '[\"ROLE_MEMBER\"]', '2024-03-05 13:47:36'),
+(38, 'ghj@ghj.com', '$2y$10$WVdD8VrMPWTbF6fZBnxpLeOsY2hjcaW6cMSQ9L2lXpGyMoCl1/Hoe', '[\"ROLE_MEMBER\"]', '2024-03-05 13:50:55'),
+(39, 'ko@ko.com', '$2y$10$WOeRGMq2vddkIuoclTZ/PuEeituLqt3EGCXfvAWTU/sxhxEQwktrS', '[\"ROLE_ADMIN\",\"ROLE_MEMBER\"]', '2024-03-05 13:55:34'),
+(40, 'hjkl@hjkl.com', '$2y$10$ZxXJq.LNe9bMoVxLjls/u.FzhB4sMJkm9JjdEyD6cIH3YHTFPCzy2', '[\"ROLE_MEMBER\"]', '2024-03-05 15:52:30');
 
 --
 -- Index pour les tables déchargées
@@ -241,31 +246,31 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT pour la table `article`
 --
 ALTER TABLE `article`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT pour la table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT pour la table `contact`
 --
 ALTER TABLE `contact`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT pour la table `post`
 --
 ALTER TABLE `post`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- Contraintes pour les tables déchargées

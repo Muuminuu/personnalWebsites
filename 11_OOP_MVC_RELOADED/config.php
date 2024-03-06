@@ -10,4 +10,9 @@ const DB_NAME = "blog_php";
 const DB_PORT = 3306;
 const DB_USER = "root";
 const DB_PASS = "";
+
+const CONFIG_COOKIE_NAME = "user";
+
+// const CONFIG_COOKIE_EXPIRE = time() + 3600;
+
 ?>

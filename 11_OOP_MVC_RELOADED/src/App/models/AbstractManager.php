@@ -33,7 +33,14 @@ abstract class AbstractManager
         $row = self::$db->select($sql_query,$params);
         return $row;
     }
-
+    
+    public function getAllBy ($query=null){
+        $default_query = "SELECT * FROM ".self::$tableName." LIMIT 1";
+        $sql_query = $query===null ? $default_query : $query;
+        $row = [];
+        $row = self::$db->select($sql_query);
+        return $row;
+    }
     public function insert ($data = [])
     {
         $fields = self::$obj->getAttributes();
@@ -69,4 +76,9 @@ abstract class AbstractManager
         $update = self::$db->query("UPDATE ".self::$tableName." SET ".$str_values." WHERE id='".$id."'",$data);
         return $update;
     }
+    public function updateAdam($query){
+        $update = self::$db->query($query);
+        return $update;
+    }
+
 }

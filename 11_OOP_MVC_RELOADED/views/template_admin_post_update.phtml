@@ -1,6 +1,6 @@
 <h1>Update Post #<?= $post_id?></h1>
 
-    <form method="POST" action="?page=adminpost&action=update&id=<?= $the_post['id']; ?>">
+    <form method="POST" action="?page=adminpost&action=update&id=<?= $post['id']?>">
         <div class="mb-3">
             <label for="title" class="form-label">Title</label>
             <input type="text" value="<?= $post['title']; ?>" class="form-control" id="title" name="title" placeholder="Add a title">
@@ -14,7 +14,7 @@
             <input type="text" value="<?= $post['image']; ?>" class="form-control" id="image" name="image" placeholder="Add an image url">
         </div>
         <div class="mb-3">
-            
+
             <input type="submit" class="btn btn-success" value="Update this Post">
         </div>
     </form>

@@ -29,8 +29,22 @@ class AdminPostController extends AbstractController{
 
     public function create() {
 
-
-        ;
+        $manager = new PostManager();
+        if (isset($_POST['title'])) {
+            $title = Utils::inputCleaner($_POST['title']);
+            $description = Utils::inputCleaner($_POST['description']);
+            $image = Utils::inputCleaner($_POST['image']);
+            $insert = $manager->insert([
+                $_SESSION['user']['id'],
+                $title,
+                $description,
+                $image,
+                date("Y-m-d H:i:s"),
+            ]);
+            $lastid = $insert-> lastInsertId();
+        }
+        header ("Location:?page=admin&newpost=".$lastid);
+        die();
     }
     public function delete() {
 
@@ -47,6 +61,7 @@ class AdminPostController extends AbstractController{
     public function update() 
     {
         $post_id = (int)$_GET['id'];
+        var_dump($post_id);
         $manager = new PostManager();
         if(isset($_POST['title']) && isset($_POST['description']) && isset($_POST['image']) && !empty($_POST['title']) && !empty($_POST['description']) && !empty($_POST['image'])) {
             $title = Utils::inputCleaner($_POST['title']);
@@ -56,15 +71,17 @@ class AdminPostController extends AbstractController{
                 $_SESSION['user']['id'],
                 $title,
                 $description,
-                $image
+                $image,
+                date("Y-m-d H:i:s"),
             ]);
+            header ("Location:?page=admin");
         }
         $post = $manager->getOneById($post_id);
         $template = './views/template_admin_post_update.phtml';
         $this->render($template, [
             'post' => $post,
             'post_id' => $post_id,
-
+        
         ]);
     }
 

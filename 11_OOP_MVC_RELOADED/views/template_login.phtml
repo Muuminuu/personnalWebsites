@@ -25,10 +25,12 @@
     <label for="password" class="form-label">Password</label>
     <input type="password" name="password" class="form-control" id="password">
   </div>
+  <?php if (isset($_SESSION['cookie']) && ((bool)$_SESSION['cookie']) === true): ?>
   <div class="mb-3 form-check">
     <input type="checkbox" class="form-check-input" id="remember_me" name="remember_me">
     <label class="form-check-label" for="remember_me">Check me out</label>
   </div>
+  <?php endif; ?>
   <button type="submit" class="btn btn-dark mb-3">Sign In</button>
 </form>
 <?php else : ?>

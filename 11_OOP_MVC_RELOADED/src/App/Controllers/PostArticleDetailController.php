@@ -10,7 +10,7 @@ use App\Models\UserManager;
 use App\Services\Authenticator;
 use App\Controllers\AbstractController;
 
-class AdminPostArticleController extends AbstractController{
+class PostArticleDetailController extends AbstractController{
     public function __construct() {
         if(!Authenticator::isRole("ROLE_ADMIN")){
             header('Location: ?page=home'); // sera login quand on aura une page admin ???
@@ -26,7 +26,7 @@ class AdminPostArticleController extends AbstractController{
         $a = new ArticleManager();
         $articles = $a->getAll();
 
-        $template = './views/template_post_article_update.phtml';
+        $template = './views/template_post_article_detail.phtml';
         $this->render($template, [
         'title' => 'Welcome to the Admin Dashboard',
         'posts' => $posts,

@@ -4,47 +4,49 @@
 
         <form action="" method="POST">
 
-
         <button class="btn btn-info" onclick="toggle('art_text');" type="button">Texte</button>
         <button class=" btn btn-warning" onclick="toggle('art_image');" type="button">Image</button>
 
-            
                 <div id="art_text" class="mb-3">
-
-
                 <label for="article" class="form-label">Texte</label>
                 <textarea id="article_texte" type="text" class="form-control" id="article" name="article"><?php if(isset($fileEdit)) echo $fileEdit['article']?></textarea>
                 </div>
-            
-            
                 <div id="art_image" class="mb-3 hidden">
-
-
                 <label for="image" class="form-label">Image</label>
                 <input disabled type="text" id="article_image" value="<?php if(isset($fileEdit)) echo $fileEdit['image'] ?>" class="form-control" id="image" name="image" placeholder="Add an image url">
                 </div>
                 <label for="position" class="form-label">Position in the article</label>
                 <input type="number" class="form-control" id="position" name="position" value="<?php if(isset($fileEdit)) echo $fileEdit['position'] ?>" placeholder="position">
             <button class="btn btn-success" type="submit">Add !</button>
-        <!-- </ul> -->
-        
         
         </form>
     </div>
     
     <div class= "col-6">
-
-        <h3>overview of the article</h3>
+        <h3>Go to detail page (user version)</h3>
+        <a href="?page=post_detail&id=<?= $id ?>"><button class="btn btn-info">Go to detail</button></a>
+        <div class="d-flex row">
+            <h3 class="col-9">Overview of the article</h3>
+            <h3 class="col-3">Position</h3>
+            <hr class=" border border-black border3">
+        </div>
+        
 
         <div class="container d-flex row">
             <?php foreach($files_ordered as $file): ?>
-            <p class="col-6">
+            <p class="col-10">
             <?php if ((isset($file['image'])) && !empty($file['image'])): ?> 
             <img class="img-thumbnail" src="<?= urldecode($file['image'])?>" alt="" />
             <?php else: echo $file['article']; endif?>
             </p>
-            <p class="col-6"><?= $file['position'] ?></p>
-            <a href='?page=post_update&id=<?= $id ?>&id_file=<?= $file['id'] ?>'><button class="btn btn-warning"  >Update</button></a>
+            <p class="col-2"><?= $file['position'] ?></p>
+            
+            <div class="d-flex row mb-3">
+                <a class="col-6" href='?page=post_update&id=<?= $id ?>&id_file=<?= $file['id'] ?>'><button class="btn btn-warning"  >Update</button></a>
+                <a class="col-6" href="javascript:deleteArticle(<?= $file['id']?>,<?= $id ?>)"><button class="btn btn-danger" >Delete</button></a>
+            </div>
+            
+            <hr class="border border-success border-2">
             <?php endforeach; ?>
         </div>
 
@@ -72,6 +74,14 @@
         doc = document.getElementById(ajout);
         doc.classList.toggle('hidden');
     }
+
+    function deleteArticle(article_id,id){
+        const question = window.confirm("Are you sure to delete the article "+article_id+" ?");
+        if (question) {
+        location.href="?page=post_delete&file_id="+article_id+"&id="+id;
+        }
+    }
+
  
 </script>
 <style>
