@@ -5,7 +5,7 @@ class Utils{
 //fonction de connexion à la base de données
 const DB_HOST = "localhost";
 const DB_PORT = "3306";
-const DB_NAME = "blog_php";
+const DB_NAME = "new_blog";
 const DB_USER = "root";
 const DB_PASS = ""; //rien ou root sur mac ou autre selon configurations
 

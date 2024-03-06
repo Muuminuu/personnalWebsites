@@ -6,7 +6,7 @@ define("CONFIG_SITE_SLOGAN", "Mon Superbe MVC au top");
 
 
 CONST DB_HOST = "localhost";
-const DB_NAME = "blog_php";
+const DB_NAME = "blog_phpv2";
 const DB_PORT = 3306;
 const DB_USER = "root";
 const DB_PASS = "";

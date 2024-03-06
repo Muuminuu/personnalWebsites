@@ -12,7 +12,7 @@
 <!-- HEADER -->
 <header>
 
-    <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg" data-bs-theme="dark">
   <div class="container-fluid">
     <a class="navbar-brand" href="#" ><img src="./assets/logo/flight.png" style="width: 50px;"/></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,15 +44,15 @@
             <li><hr class="dropdown-divider"></li>
             <li><a href="?page=profil" class="dropdown-item">Profil</a></li>
             <?php endif; ?>
+            <?php if(isset($_SESSION['user']['roles']) && in_array("ROLE_MEMBER",json_decode($_SESSION['user']['roles']))): ?>
+            <li><a href="?page=profil" class="dropdown-item">Profil</a></li>
+            <?php endif; ?>
             
             <?php if (!isset($_SESSION['user'])): ?>
             <li><a class="dropdown-item" href="?page=login">login</a></li>
             <?php else: ?>
             <li><a class="dropdown-item" href="?page=logout">Logout</a></li>
             <?php endif; ?>
-            <!-- <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li> -->
           </ul>
         </li>
 
@@ -60,7 +60,7 @@
       <form class="d-flex" role="search">
         <input name="page" value="search" type="hidden">
         <input name="keywords" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
+        <button class="btn btnsearch btn-outline-light" type="submit">Search</button>
       </form>
 
     
@@ -91,7 +91,7 @@
 
 <!-- footer -->
 
-<footer  class="bg-dark text-white text-center p-2">
+<footer  class="bg-bs-green text-white text-center p-2">
     <p>
         &copy; cci unlimited
     </p>
