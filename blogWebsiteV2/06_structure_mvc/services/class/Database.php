@@ -12,7 +12,7 @@ class Database {
     
     public function __construct(
         $db_host = "localhost",
-        $db_name = "blog_phpv2",
+        $db_name = "new_blog",
         $db_port = "3306",
         $db_user = "root",
         $db_pass = ""

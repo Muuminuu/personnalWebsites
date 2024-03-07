@@ -13,7 +13,7 @@ if ($db){
     $users = $sql->fetchAll(PDO::FETCH_ASSOC);
 }
 
-Utils::dump($users);
+
 
 include "./views/base.phtml";
 

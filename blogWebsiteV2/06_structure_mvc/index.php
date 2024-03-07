@@ -2,6 +2,7 @@
     <?php
     
     session_start();
+    
     // session_destroy();
     // charger la config
         require "./config.php";
