@@ -1,9 +1,48 @@
 {% extends "base.twig" %}
 {% block content %}
-    <ul>
-        {% for task in tasks %}
-            <li>{{ task }} </li>
-        {% endfor %}
-    </ul> 
+<div class="container">
+    <div class="d-flex justify-content-between mb-2">
+        <h2>Liste des tâches</h2>
+        <a class="text-dark text-decoration-none" href="/personnalWebsites/todo_list/public/task/new/"><button class="btn btnnewtask" type="button">New Task</button></a>
+    </div>
+            {% for task in tasks %}
+                <div class="card myblueborder m-2 cardhover">
+                    <div class="d-flex justify-content-between m-2">
+                        <div class=" d-flex">
+                            <h3>{{ task.title }}</h3>
+
+                        </div>
+                        
+                        <div class="d-flex">
+                            <div>
+                                <p class="mx-5">{{ task.status }}</p>
+                            </div>
+                            <div>
+                                <a class="text-dark text-decoration-none" href="/personnalWebsites/todo_list/public/task/{{ task.id }}" ><button class="btn btnshow" type="button">Show</button></a>
+                                <a class="text-dark text-decoration-none" href="/personnalWebsites/todo_list/public/task/{{ task.id }}/update" ><button class="btn btnupdate" type="button">Update</button></a>
+                                <a class="text-dark text-decoration-none" href="/personnalWebsites/todo_list/public/task/" ><button class="btn btndelete" type="button">Delete</button></a>
+                                <a type="button" class="btn btn-danger" href="javascript:deleteTask({{task.id}})">
+                        Supprimer la tâche
+                    </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            {% endfor %}
+        <a class="d-flex justify-content-center mt-5 mb-3 text-decoration-none" href="/personnalWebsites/todo_list/public/"><button class="btn btnupdate" type="button">Back to HomePage</button></a>
+</div>
+
+ <script>
+        function deleteTask(id) {
+            console.log(id);
+            // On affiche une fenetre de controle pour confirmer la suppression
+            const question = window.confirm("Voulez-vous vraiment supprimer cette tâche" + id + "?");
+            // On fait l'action de supprimer seulement si la fenetre de controle est confirmer
+            if (question === true) {
+                window.location.href = "http://localhost/formation_php/todolist_php/public/task/delete/" + id;
+            }
+        }
+    </script>
 {% endblock %}
 

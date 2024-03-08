@@ -26,7 +26,13 @@ public function index() {
         // bind dynamique :id
         'controller' => 'TaskController@show',
         'method' => 'GET'
-        ]
+    ],
+    '/task/delete/:id' => [
+        'controller' => 'TaskController@delete',
+        // methode qui s'appellera new
+        'method' => 'POST'
+    ],
+
     ];
 
     $url = $_SERVER['REQUEST_URI'];
@@ -39,17 +45,23 @@ public function index() {
         $controller = new TaskController();
         $controller->index();
     }
-    if ($url === "/personnalWebsites/todo_list/public/task/new") {
+    if ($url === "/personnalWebsites/todo_list/public/task/new/") {
         $controller = new TaskController();
         $controller->new();
     }
 
     $parts = explode('/', $url);
 
-    if (array_key_exists(5, $parts) && $parts[5]!=="" && $parts[4]==="task") {
+    if (array_key_exists(5, $parts) && $parts[5]!=="" && (int)$parts[5] && $parts[4]==="task" && !$parts[6]) {
         $id = $parts[5];
         $controller = new TaskController();
         $controller->show($id);
+    }
+
+    if (array_key_exists(5, $parts) && $parts[5]!=="" && (int)$parts[5] && $parts[4]==="task" && $parts[6]==="update") {
+        $id = $parts[5];
+        $controller = new TaskController();
+        $controller->update($id);
     }
     
 }

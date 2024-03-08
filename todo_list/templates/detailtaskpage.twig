@@ -1,0 +1,14 @@
+{% extends "base.twig" %}
+{% block content %}
+    <div class="container ">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="d-flex justify-content-center mt-5">Detail task #{{ task.id }}</h2>
+                <p class="d-flex justify-content-center mt-5">{{ task['title'] }}</p>
+                <p class="d-flex justify-content-center mt-5">{{ task['status'] }}</p>
+
+                <a class="d-flex justify-content-center mt-5 mb-3 text-decoration-none" href="/personnalWebsites/todo_list/public/task/"><button class="btn btnupdate" type="button">Back to the Taskselection</button></a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

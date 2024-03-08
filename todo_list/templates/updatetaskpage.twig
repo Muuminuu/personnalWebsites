@@ -1,19 +1,20 @@
 {% extends "base.twig" %}
 {% block content %}
     <section>
-        <h2 class="d-flex justify-content-center mt-5">New task</h2>
+        <h2 class="d-flex justify-content-center mt-5">Updating Task# {{ task.id }}</h2>
             <div class="container">
                 
                 <form class="row g-3" method="POST">
 
                     <div class="col-12">
                         <label for="title" class="form-label">Title</label>
-                        <input type="text" class="form-control" name="title" id="title" placeholder="Workout">
+                        <input type="text" class="form-control" name="title" id="title" value="{{ task.title }}">
                     </div>
+                    <p>Previous status : {{ task.status }}</p>
                     <div class="col-12">
                         <label for="status" class="form-label">Status</label>
                         {# <input type="text" class="form-control" name="status" id="status"> #}
-                        <select class="form-select" name="status" id="status">
+                        <select class="form-select" name="status" id="status" value="{{ task.status }}">
                             <option class="btnst" value="pending">Pending</option>
                             <option class="btnteal" value="in_progress">In Progress</option>
                             <option class="btndone" value="done">Done</option>
@@ -21,14 +22,14 @@
                     </div>
                     <div class="col-md-6">
                         <label for="image" class="form-label">Image</label>
-                        <input type="text" class="form-control" name="image" id="image">
+                        <input type="text" class="form-control" name="image" id="image" value="{{ task.image }}">
                     </div>
                     
                     <div class="col-12">
-                        <button type="submit" class="btn btnst">Add new Task</button>
+                        <button type="submit" class="btn btnst">Update Task {{task.id}}</button>
                     </div>
                 </form>
-                <a class="d-flex justify-content-center mt-5 mb-3 text-decoration-none" href="/personnalWebsites/todo_list/public/task/"><button class="btn btnupdate" type="button">Back to the Taskselection</button></a>
+                {# <a class="d-flex justify-content-center mt-5 mb-3 text-decoration-none" href="/personnalWebsites/todo_list/public/task/"><button class="btn btnupdate" type="button">Back to the Taskselection</button></a> #}
             </div>
     </section>
     

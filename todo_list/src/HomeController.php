@@ -14,7 +14,7 @@ class HomeController {
         $loader = new FilesystemLoader(dirname(__DIR__) . "\\templates");
         $twig = new Environment($loader);
         echo $twig->render('homepage.twig', [
-            'name' => 'Jean Forteroche',
+            'name' => 'ToDoList',
             'tasks' => $tasks
         ]);
     }
