@@ -1,8 +1,17 @@
 <h1>Admin Dashboard</h1>
 <p class="bg-light">Welcome to the Dashboard <span class="text-success"><strong><?= $_SESSION['user']['firstname'];?> <?= $_SESSION['user']['lastname'];?></strong></span> </p>
 
-<h2>Handle Accounts</h2>
-<p><a href="?page=admin_accounts" class="btn btn-warning">Accounts overview</a></p>
+<div class="d-flex wrap">
+  <div class="col-4">
+    <h2>Handle Accounts</h2>
+    <p><a href="?page=admin_accounts" class="btn btn-warning">Accounts overview</a></p>
+  </div>
+  <div class="col-8">
+    <h2>Wiki</h2>
+    <p>Update action will open a page with the general informations.  Write Article allows you to write pieces of text or images and order them.</p>
+  </div>
+</div>
+
 
 <h2>Handle Posts</h2>
 <p><a class="btn btn-success" href="?page=admin_post_add" role="button">Add a new Post</a></p>
@@ -17,6 +26,7 @@
       <th scope="col">Created_at</th>
       <th scope="col">Actions</th>
       <th scope="col">Write Article</th>
+      <th scope="col">Manage Comments</th>
     </tr>
   </thead>
   <tbody>
@@ -32,6 +42,7 @@
         <br>
         <a class="btn btn-danger mb-2" href="javascript:deletePost(<?= $post['id']?>)" role="button">Delete</a></td>
         <td><a class="btn btn-info" href="?page=post_update&id=<?= $post['id']?>" role="button">Write Article</a></td>
+        <td><a class="btn btn-primary" href="?page=admin_comments&id=<?= $post['id']?>" role="button">Manage Comments</a></td>
       </tr>
     <?php endforeach; ?>
   </tbody>

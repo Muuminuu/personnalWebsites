@@ -1,0 +1,49 @@
+<div>
+    <h3>Comments about article #<?= $post['id'] ?> <?= $post['title'] ?></h3>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">User Id</th>
+      <th scope="col">Name</th>
+      <!-- <th scope="col">Date</th> -->
+      <th scope="col">Comment</th>
+      <th scope="col">Actions</th>
+    </tr>
+
+  </thead>
+  <tbody>
+    <?php foreach($comments as $comment): ?>
+      <tr>
+
+        <th scope="row"><?= $comment['user_id'] ?></th>
+        <td><?= $comment['firstname'] ?> <?= $comment['lastname'] ?></td>
+        <!-- <td><?= $comment['created_at'] ?></td> -->
+
+        <td><?= $comment['comment'] ?></td>
+        <td>
+        <!-- <a class="btn btn-warning mb-2" href="javascript:updateComment(<?= $comment['id']?>)" role="button">Update</a> -->
+        
+        <br>
+        <a class="btn btn-danger mb-2" href="javascript:deleteComment(<?= $comment['id']?>, <?= $post['id'] ?>)" role="button">Delete</a></td>
+        
+        </td>
+
+      </tr>
+    <?php endforeach; ?>
+  </tbody>
+</table>
+
+<script>
+  function deleteComment(id, post_id){
+    const question = window.confirm("Are you sure to delete the comment "+id+" ?");
+    console.log(question);
+    if (question) {
+      location.href="?page=admin_comments_delete&id="+post_id+"&comment_id="+id;
+    }
+  }
+
+  // function updateComment(id){
+  //     location.href="?page=admin_comments_update&id=<?= $comment['id']?>);
+  // }
+</script>

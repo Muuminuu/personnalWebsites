@@ -8,16 +8,15 @@
 
                     <div class="col-12">
                         <label for="title" class="form-label">Title</label>
-                        <input type="text" class="form-control" name="title" id="title" value="{{ task.title }}">
+                        <input required type="text" class="form-control" name="title" id="title" value="{{ task.title }}">
                     </div>
-                    <p>Previous status : {{ task.status }}</p>
                     <div class="col-12">
                         <label for="status" class="form-label">Status</label>
                         {# <input type="text" class="form-control" name="status" id="status"> #}
                         <select class="form-select" name="status" id="status" value="{{ task.status }}">
-                            <option class="btnst" value="pending">Pending</option>
-                            <option class="btnteal" value="in_progress">In Progress</option>
-                            <option class="btndone" value="done">Done</option>
+                            <option class="btnst" value="pending" {% if task.status == 'pending' %}selected{% endif %}>Pending</option>
+                            <option class="btnteal" value="in_progress" {% if task.status == 'in_progress' %}selected{% endif %}>In Progress</option>
+                            <option class="btndone" value="done" {% if task.status == 'done' %}selected{% endif %}>Done</option>
                         </select>
                     </div>
                     <div class="col-md-6">

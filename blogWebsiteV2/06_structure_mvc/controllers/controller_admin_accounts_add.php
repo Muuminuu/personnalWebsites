@@ -8,13 +8,8 @@ if (!isset($_SESSION['user']['roles']) || !in_array("ROLE_ADMIN",json_decode($_S
 if(isset($_POST['email']) && isset($_POST['password']) && !empty($_POST['email']) && !empty($_POST['password'])) {
 
     $email = Utils::inputCleaner($_POST['email']); 
-    // htmlentitiestransformera en caractères alphanumériques, pour se protéger. tout ce qui n'est pas alphanumerique seront traité
-    //strip_tags enlève les balises
     $password = htmlentities(strip_tags($_POST['password'])); 
-
     $password = password_hash($password, PASSWORD_DEFAULT);
-    // fonction password hash d ephp => hache de mdp;
-    //avec l'algorithme PASSWORD_DEFAULT;
 
     $errors = [];
     $exists = false;
@@ -23,8 +18,6 @@ if(isset($_POST['email']) && isset($_POST['password']) && !empty($_POST['email']
         $errors[] = "Veuillez renseigner une adresse email valide svp";
     }
 
-    //Vérifier si l'email est dans la bdd
-    // connexion à la bdd
     $db = Utils::connectDB();
     // on recherche si l'email est déjà dans la table user
     $query = $db->prepare("SELECT email FROM user WHERE email=:email"); 
@@ -90,6 +83,7 @@ if(isset($_POST['email']) && isset($_POST['password']) && !empty($_POST['email']
         
         $sql->execute();
 
+        header("Location: ?page=admin_accounts");
     }      
 }
 

@@ -1,6 +1,6 @@
 <?php
 //nouvelle méthode
-const CONFIG_SITE_TITLE = "Mon Superbe MVC";
+const CONFIG_SITE_TITLE = "Mon Superbe MVC !";
 //ancienneméthode
 define("CONFIG_SITE_SLOGAN", "Mon Superbe MVC au top");
 // //fonction de connexion à la base de données

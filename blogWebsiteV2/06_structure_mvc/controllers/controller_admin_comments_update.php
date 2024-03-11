@@ -24,26 +24,7 @@ if($user_role){
 
 // Utils::dump($user);
 
-$state = [ 
-    "Auvergne-Rhône-Alpes",
-    "Bourgogne-Franche-Comté",
-    "Bretagne",
-    "Centre-Val de Loire",
-    "Corse",
-    "Grand Est",
-    "Hauts-de-France",
-    "Ile-de-France",
-    "Normandie",
-    "Nouvelle-Aquitaine",
-    "Occitanie",
-    "Pays de la Loire",
-    "Provence Alpes Côte d’Azur",
-    "Guadeloupe",
-    "Guyane",
-    "Martinique",
-    "Mayotte",
-    "Réunion"
-];
+
 
 
 if (isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['email']) && isset($_POST['address1']) && isset($_POST['address2']) && isset($_POST['city']) && isset($_POST['state']) && isset($_POST['zip']) && isset($_POST['roles'])) {

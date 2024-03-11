@@ -20,23 +20,23 @@
         <td><?= $user['email'] ?></td>
         <td><?= $user['roles'] ?></td>
         <td><?= $user['registered_at'] ?>...</td>
-        <td><a class="btn btn-warning mb-2" href="?page=admin_accounts_update&id=<?= $user['id']?>)" role="button">Update</a>
+        <td><a class="btn btn-warning mb-2" href="javascript:updateUser(<?= $user['id']?>)" role="button">Update</a>
         <br>
-        <a class="btn btn-danger mb-2" href="javascript:deletePost(<?= $user['id']?>)" role="button">Delete</a></td>
+        <a class="btn btn-danger mb-2" href="javascript:deleteUser(<?= $user['id']?>)" role="button">Delete</a></td>
       </tr>
     <?php endforeach; ?>
   </tbody>
 </table>
 <p><a class="btn btn-success" href="?page=admin_post_add" role="button">Add a new Post</a></p>
 <script>
-  function deletePost(id){
+  function deleteUser(id){
     const question = window.confirm("Are you sure to delete the post "+id+" ?");
     if (question) {
-      location.href="?page=admin_post_delete&id="+id;
+      location.href="?page=admin_accounts_delete&id="+id;
     }
   }
 
-  function updatePost(id){
-      location.href="?page=admin_post_update&id="+id;
+  function updateUser(id){
+      location.href="?page=admin_accounts_update&id="+id;
   }
 </script>

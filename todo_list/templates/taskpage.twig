@@ -8,29 +8,25 @@
             {% for task in tasks %}
                 <div class="card myblueborder m-2 cardhover">
                     <div class="d-flex justify-content-between m-2">
-                        <div class=" d-flex">
+                        <div class=" d-flex col-7">
                             <h3>{{ task.title }}</h3>
 
                         </div>
-                        
-                        <div class="d-flex">
-                            <div>
-                                <p class="mx-5">{{ task.status }}</p>
-                            </div>
-                            <div>
+                        <div class="col-2">
+                            <span class="badge bpstatus">
+                                        <p class="">{{ task.status }}</p>
+                            </span>
+                        </div>
+                        <div class="d-flex col-3">
                                 <a class="text-dark text-decoration-none" href="/personnalWebsites/todo_list/public/task/{{ task.id }}" ><button class="btn btnshow" type="button">Show</button></a>
-                                <a class="text-dark text-decoration-none" href="/personnalWebsites/todo_list/public/task/{{ task.id }}/update" ><button class="btn btnupdate" type="button">Update</button></a>
-                                <a class="text-dark text-decoration-none" href="/personnalWebsites/todo_list/public/task/{{ task.id }}/delete/" onclick="deleteTask({{task.id}}" ><button class="btn btndelete" type="button">Delete</button></a>
-                                {# <a type="button" class="btn btn-danger" href="javascript:deleteTask({{task.id}})">
-                        Supprimer la tâche
-                    </a> #}
-                            </div>
+                                <a class="text-dark text-decoration-none px-2" href="/personnalWebsites/todo_list/public/task/{{ task.id }}/update" ><button class="btn btnupdate" type="button">Update</button></a>
+                                <a class="text-dark text-decoration-none" href="javascript:deleteTask({{task.id}})" ><button class="btn btndelete" type="button">Delete</button></a>
                         </div>
                     </div>
                 </div>
                 
             {% endfor %}
-        <a class="d-flex justify-content-center mt-5 mb-3 text-decoration-none" href="/personnalWebsites/todo_list/public/"><button class="btn btnupdate" type="button">Back to HomePage</button></a>
+        <a class="d-flex justify-content-center mt-5 mb-3 text-decoration-none" href="/personnalWebsites/todo_list/public/"><button class="btn btnback" type="button">Back to HomePage</button></a>
 </div>
 
  <script>
@@ -41,6 +37,7 @@
             // On fait l'action de supprimer seulement si la fenetre de controle est confirmer
             if (question === true) {
                 window.location.href = "http://localhost/personnalWebsites/todo_list/public/task/" + id +"/delete/";
+
             }
         }
     </script>

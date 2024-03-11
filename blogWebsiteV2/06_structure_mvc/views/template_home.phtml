@@ -1,5 +1,5 @@
 <h1><?= CONFIG_SITE_TITLE?></h1>
-<?php if (isset($_SESSION['user']['roles']) && in_array("ROLE_ADMIN",json_decode($_SESSION['user']['roles']))): ?>
+<?php if (isset($_SESSION['user']['roles']) && in_array("ROLE_MEMBER",json_decode($_SESSION['user']['roles']))): ?>
   <p>Welcome dear <span class="text-success"><strong><?= $_SESSION['user']['firstname'];?> <?= $_SESSION['user']['lastname'];?></strong></span> !</p>
 <?php endif; ?>
 <!-- carousel dynamique -->

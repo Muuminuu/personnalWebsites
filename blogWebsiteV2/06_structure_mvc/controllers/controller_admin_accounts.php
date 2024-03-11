@@ -13,8 +13,6 @@ if ($db){
     $users = $sql->fetchAll(PDO::FETCH_ASSOC);
 }
 
-
-
 include "./views/base.phtml";
 
 ?>

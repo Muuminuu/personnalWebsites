@@ -1,6 +1,6 @@
 <h1>Update user</h1>
     <section id="accounts"></section>
-    <form class="row g-3" action="?page=admin_accounts_add" method="POST">
+    <form class="row g-3" action="?page=admin_accounts_update&id=<?= $user['id']?>" method="POST">
             <div class="col-6">
                 <label for="firstname" class="form-label">Firstname*</label>
                 <input required type="text" class="form-control" id="firstname" name="firstname" value="<?= $user['firstname']?>" 
@@ -53,7 +53,7 @@
                 </div>
             </div>
             <div class="col-12 mb-3">
-                <button type="submit" class="btn btn-dark">Send</button>
+                <button type="submit" class="btn btn-dark">Actualize</button>
             </div>
             </form>
             <script>

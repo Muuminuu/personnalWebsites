@@ -14,6 +14,7 @@ nav, footer{
 }
 .btnshow {
     background-color: var(--bs-teal);
+    width : 80px;
 }
 .btnshow:hover {
     background-color: var(--bs-white);
@@ -24,14 +25,20 @@ nav, footer{
 
 .btnupdate {
     background-color: var(--bs-my-light-blue);
+    width : 80px;
 }
 .btnupdate:hover {
     background-color: var(--bs-white);
     color : var(--bs-my-light-blue)
 }
 
+.btnback {
+    background-color: var(--bs-my-light-blue);
+}
+
 .btndelete {
     background-color: var(--bs-danger-border-subtle);
+    width : 80px;
 }
 .btndelete:hover {
     background-color: var(--bs-white);
@@ -83,6 +90,11 @@ nav, footer{
     background-color: var(--bs-my-code-color);
 }
 
+.bpstatus{
+    background-color: var(--bs-bpstatus);
+    width: 100px;
+}
+
 :root,
 [data-bs-theme=light] {
   --bs-blue: #0d6efd;
@@ -93,7 +105,7 @@ nav, footer{
   --bs-orange: #fd7e14;
   --bs-yellow: #ffc107;
   --bs-my-orange : #f5a549;
-  
+  --bs-bpstatus: #6d1046;
   --bs-my-orange-subtle: #f5c7a8;
 --bs-my-code-color: #dda8f5;
   --bs-green: #198754;

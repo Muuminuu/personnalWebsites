@@ -121,8 +121,6 @@ $task = $pdo->select(
         header("Location: /personnalWebsites/todo_list/public/task/");
         }
 
-        
-        
 
         echo $twig->render('updatetaskpage.twig', [
             'task' => $task
@@ -147,15 +145,39 @@ $task = $pdo->select(
         
         $pdo->query("DELETE FROM task WHERE id = " .$id);
         
-
-
-        $task2 = $pdo2-> select("SELECT * from task");
+        // $task2 = $pdo2-> select("SELECT * from task");
         header('Location: /personnalWebsites/todo_list/public/task/');
 
-        echo $twig->render('taskpage.twig', [
+        // echo $twig->render('taskpage.twig', [
 
-            'task2' => $task2
-        ]);
+        //     'task2' => $task2
+        // ]);
     }
+     public function search () {
+
+
+        $loader = new FilesystemLoader(dirname(__DIR__) . "\\templates");
+        $twig = new Environment($loader);
+        $keywords = strip_tags(urldecode(trim($_GET['keywords'])));
+        $posts = [];
+            
+        $pdo = new Database(
+            "127.0.0.1",
+            "todolist",
+            "3306",
+            "root",
+            ""
+        );
+
+        $posts = $pdo->selectAll("SELECT * FROM post WHERE title LIKE '%".$keywords."%' OR description LIKE '%".$keywords."%' OR image LIKE '%".$keywords."%' ORDER BY id");
+
+
+        echo $twig->render('searchpage.twig', [
+            'posts' => $posts,
+            'keywords' => $keywords
+        ]);
+        
+        
+     }
     
 }
