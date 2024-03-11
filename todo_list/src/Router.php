@@ -27,11 +27,11 @@ public function index() {
         'controller' => 'TaskController@show',
         'method' => 'GET'
     ],
-    '/task/delete/:id' => [
-        'controller' => 'TaskController@delete',
-        // methode qui s'appellera new
-        'method' => 'POST'
-    ],
+    // '/task/delete/:id' => [
+    //     'controller' => 'TaskController@delete',
+    //     // methode qui s'appellera new
+    //     'method' => 'POST'
+    // ],
 
     ];
 
@@ -62,6 +62,12 @@ public function index() {
         $id = $parts[5];
         $controller = new TaskController();
         $controller->update($id);
+    }
+
+    if (array_key_exists(5, $parts) && $parts[5]!=="" && (int)$parts[5] && $parts[4]==="task" && $parts[6]==="delete") {
+        $id = $parts[5];
+        $controller = new TaskController();
+        $controller->delete($id);
     }
     
 }

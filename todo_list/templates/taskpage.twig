@@ -20,10 +20,10 @@
                             <div>
                                 <a class="text-dark text-decoration-none" href="/personnalWebsites/todo_list/public/task/{{ task.id }}" ><button class="btn btnshow" type="button">Show</button></a>
                                 <a class="text-dark text-decoration-none" href="/personnalWebsites/todo_list/public/task/{{ task.id }}/update" ><button class="btn btnupdate" type="button">Update</button></a>
-                                <a class="text-dark text-decoration-none" href="/personnalWebsites/todo_list/public/task/" ><button class="btn btndelete" type="button">Delete</button></a>
-                                <a type="button" class="btn btn-danger" href="javascript:deleteTask({{task.id}})">
+                                <a class="text-dark text-decoration-none" href="/personnalWebsites/todo_list/public/task/{{ task.id }}/delete/" onclick="deleteTask({{task.id}}" ><button class="btn btndelete" type="button">Delete</button></a>
+                                {# <a type="button" class="btn btn-danger" href="javascript:deleteTask({{task.id}})">
                         Supprimer la tâche
-                    </a>
+                    </a> #}
                             </div>
                         </div>
                     </div>
@@ -40,7 +40,7 @@
             const question = window.confirm("Voulez-vous vraiment supprimer cette tâche" + id + "?");
             // On fait l'action de supprimer seulement si la fenetre de controle est confirmer
             if (question === true) {
-                window.location.href = "http://localhost/formation_php/todolist_php/public/task/delete/" + id;
+                window.location.href = "http://localhost/personnalWebsites/todo_list/public/task/" + id +"/delete/";
             }
         }
     </script>

@@ -120,6 +120,8 @@ $task = $pdo->select(
         );
         header("Location: /personnalWebsites/todo_list/public/task/");
         }
+
+        
         
 
         echo $twig->render('updatetaskpage.twig', [
@@ -129,20 +131,31 @@ $task = $pdo->select(
 
     public function delete(int $id)
     {
+        $loader = new FilesystemLoader(dirname(__DIR__) . "\\templates");
+        $twig = new Environment($loader);
         // la correspondance de l'id souhaite via une requete sql
         // Se connecter à la base de données
         $pdo = new Database(
             "127.0.0.1",
-            "todolist_php",
+            "todolist",
             "3306",
             "root",
             ""
         );
+        $pdo2 = $pdo;
+
+        
+        $pdo->query("DELETE FROM task WHERE id = " .$id);
+        
 
 
-        $task = $pdo->select("DELETE FROM task WHERE id = " .$id);
-        header('Location: personnalWebsites/todolist_php/public/task');
+        $task2 = $pdo2-> select("SELECT * from task");
+        header('Location: /personnalWebsites/todo_list/public/task/');
+
+        echo $twig->render('taskpage.twig', [
+
+            'task2' => $task2
+        ]);
     }
-
     
 }
