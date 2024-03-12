@@ -23,6 +23,10 @@
                         <label for="image" class="form-label">Image</label>
                         <input type="text" class="form-control" name="image" id="image" value="{{ task.image }}">
                     </div>
+                    <div>
+                        <label for="user" class="form-label">User in charge</label>
+                        <input class="form-control" name="user" value="{{ task.user }}" id="user" rows="3">
+                    </div>
                     
                     <div class="col-12">
                         <button type="submit" class="btn btnst">Update Task {{task.id}}</button>

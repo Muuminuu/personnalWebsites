@@ -1,18 +1,45 @@
-<h1>Search Result(s) for <?= $keywords ?></h1>
+{% extends "base.twig" %}
 
-<section id="search" class="row">
-    <?php 
-    foreach($posts as $search): ?> 
-    <!-- $search, ici pourrait être n'importe quoi. -->
-    <article class="col-12 col-md-4 col-sm-6 mb-3">
-        <div class="card">
-            <img src="<?php echo $search['image']; ?>" class="card-img-top" alt="<?= $search['title'] ?>">
-                <div class="card-body">
-                <h5 class="card-title"><?php echo $search['title']; ?></h5>
-                <p class="card-text"><?= (strlen($search['description']) > 60) ? substr($search['description'],0,57).'...' : $search['description']; ?></p>
-                <a href="?page=postdetail&id=<?php echo $article['id']; ?>" class="btn btn-dark">Lire l'article en entier</a>
-            </div>
-        </div>
-    </article>
-<?php endforeach; ?>
-</section>
+{% block content %}
+
+<h1>Search Result(s) for {{ keyword }}</h1>
+
+{# <section id="search" class="row"> #}
+        {# <article class="col-12 col-md-4 col-sm-6 mb-3"> #}
+            <div class="container">
+    <div class="d-flex justify-content-between mb-2">
+        <h2 class="col-6">Task list</h2>
+        <h3 class="col-2">User</h3>
+        <h3 class="col-3">Status</h3>
+        <a class="text-dark text-decoration-none col-1" href="/personnalWebsites/todo_list/public/task/new/"><button class="btn btnnewtask" type="button">New Task</button></a>
+    </div>
+            {% for task in tasks %}
+                    <div class="card myblueborder m-2 cardhover">
+                        <div class="d-flex justify-content-between m-2">
+                            <div class=" d-flex col-6">
+                                <h4>{{ task.title }}</h4>
+
+                            </div>
+                            <div class="col-1">
+                                <p class="text-center">{{ task.user }}</p>
+                            </div>
+                            <div class="col-1">
+                                <span class="badge bpstatus">
+                                            <p class="">{{ task.status }}</p>
+                                </span>
+                            </div>
+                            <div class="d-flex col-3">
+                                    <a class="text-dark text-decoration-none" href="/personnalWebsites/todo_list/public/task/{{ task.id }}" ><button class="btn btnshow" type="button">Show</button></a>
+                                    <a class="text-dark text-decoration-none px-2" href="/personnalWebsites/todo_list/public/task/{{ task.id }}/update" ><button class="btn btnupdate" type="button">Update</button></a>
+                                    <a class="text-dark text-decoration-none" href="javascript:deleteTask({{task.id}})" ><button class="btn btndelete" type="button">Delete</button></a>
+                            </div>
+                        </div>
+                    </div>
+                    
+            {% endfor %}
+
+    {# </article> #}
+{# </section> #}
+
+
+{% endblock %}

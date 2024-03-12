@@ -34,6 +34,18 @@ abstract class AbstractManager
         return $row;
     }
     
+    public function getOneUserAndContact ($id){
+        $row = self::$db->select("SELECT * FROM user INNER JOIN contact ON contact.user_id = user.id WHERE user.id = ? LIMIT 1",[$id]);
+        return $row;
+    }
+    //incomplet
+    // public function getOneFromTwoTables ($id = null, $table=null){
+    //     $where = !is_null($id) ? " WHERE id=?" : "";
+    //     $join = !is_null($table) ? " INNER JOIN ".$table." on ".self::$tableName.".id = ".$table.".user_id" : "";
+    //     $row = [];
+    //     $row = self::$db->select("SELECT * FROM ".self::$tableName." ".$join." ".$where."LIMIT 1",[$id]);
+    //     return $row;
+    // }
     public function getAllBy ($query=null){
         $default_query = "SELECT * FROM ".self::$tableName." LIMIT 1";
         $sql_query = $query===null ? $default_query : $query;
@@ -76,9 +88,10 @@ abstract class AbstractManager
         $update = self::$db->query("UPDATE ".self::$tableName." SET ".$str_values." WHERE id='".$id."'",$data);
         return $update;
     }
-    public function updateAdam($query){
-        $update = self::$db->query($query);
+    public function updateAdam($query, $data = []){
+        $update = self::$db->query($query, $data);
         return $update;
     }
+
 
 }

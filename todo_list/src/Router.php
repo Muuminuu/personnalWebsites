@@ -52,13 +52,17 @@ class Router
             $controller = new TaskController();
             $controller->new();
         }
-
+        if ($url === "/personnalWebsites/todo_list/public/task/search/") {
+            $controller = new TaskController();
+            $controller->search();
+        }
+        
         $parts = explode('/', $url);
 
-        if (array_key_exists(5, $parts) && $parts[5] !== "" && (int)$parts[5] && $parts[4] === "task" && !array_key_exists(6, $parts)) {
-            $id = $parts[5];
+        if (array_key_exists(6, $parts) && $parts[6] !== "" && (int)$parts[6] && $parts[4] === "task" && $parts[5] === "status") {
+            $id = $parts[6];
             $controller = new TaskController();
-            $controller->show($id);
+            $controller->updateStatus($id);
         }
 
         if (array_key_exists(5, $parts) && $parts[5] !== "" && (int)$parts[5] && $parts[4] === "task" && array_key_exists(6, $parts) && $parts[6] === "update") {
@@ -71,6 +75,11 @@ class Router
             $id = $parts[5];
             $controller = new TaskController();
             $controller->delete($id);
+        }
+        if (array_key_exists(5, $parts) && $parts[5] !== "" && (int)$parts[5] && $parts[4] === "task" && array_key_exists(6, $parts) && $parts[6] === "delete") {
+            $id = $_GET['id'];
+            $controller = new TaskController();
+            $controller->updateStatus($id);
         }
     }
 }

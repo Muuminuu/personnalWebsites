@@ -3,7 +3,7 @@
 
 <h2>Accounts overview</h2>
 
-<p><a class="btn btn-success" href="?page=adminaccountsadd" role="button">Add a new User</a></p>
+<p><a class="btn btn-success" href="?page=adminaccounts&action=create" role="button">Add a new User</a></p>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -20,7 +20,7 @@
         <td><?= $user['email'] ?></td>
         <td><?= $user['roles'] ?></td>
         <td><?= $user['registered_at'] ?>...</td>
-        <td><a class="btn btn-warning mb-2" href="?page=adminaccountsupdate&id=<?= $user['id']?>)" role="button">Update</a>
+        <td><a class="btn btn-warning mb-2" href="?page=adminaccounts&action=update&id=<?= $user['id']?>" role="button">Update</a>
         <br>
         <a class="btn btn-danger mb-2" href="javascript:deletePost(<?= $user['id']?>)" role="button">Delete</a></td>
       </tr>
@@ -32,11 +32,11 @@
   function deletePost(id){
     const question = window.confirm("Are you sure to delete the post "+id+" ?");
     if (question) {
-      location.href="?page=adminpostdelete&id="+id;
+      location.href="?page=adminaccounts&id="+id;
     }
   }
 
   function updatePost(id){
-      location.href="?page=adminpostupdate&id="+id;
+      location.href="?page=adminaccounts&action=update&id="+id;
   }
 </script>

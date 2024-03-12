@@ -3,6 +3,10 @@ namespace App\Todolist;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 use App\Todolist\Services\Database;
+use App\Todolist\Repository\TaskRepository;
+
+
+
 class TaskController {
 
     public function index() {
@@ -11,6 +15,8 @@ class TaskController {
         $loader = new FilesystemLoader(dirname(__DIR__) . "\\templates");
         $twig = new Environment($loader);
 
+        // $taskRepository = new TaskRepository();
+        // $tasks = $taskRepository->index();
         $pdo = new Database(
             "127.0.0.1",
             "todolist",
@@ -48,10 +54,11 @@ class TaskController {
             $title = htmlentities(strip_tags($_POST['title']));
             $status = htmlentities(strip_tags($_POST['status']));
             $image = htmlentities(strip_tags($_POST['image']));
+            $user = htmlentities(strip_tags($_POST['user']));
 
             $pdo->query(
-                "INSERT INTO task (title, status, image) VALUES (?, ?, ?)",
-                [$title, $status, $image]
+                "INSERT INTO task (title, status, image, user) VALUES (?, ?, ?, ?)",
+                [$title, $status, $image, $user]
             );
         header("Location: /personnalWebsites/todo_list/public/task/");
         }
@@ -108,14 +115,16 @@ $task = $pdo->select(
             $title = htmlentities(strip_tags($_POST['title']));
             $status = htmlentities(strip_tags($_POST['status']));
             $image = htmlentities(strip_tags($_POST['image']));
+            $user = htmlentities(strip_tags($_POST['user']));
             $pdo->query(
 
-            "update task set title = :title, status = :status, image = :image where id = :id",
+            "update task set title = :title, status = :status, image = :image, user = :user where id = :id",
             [
                 'id' => $id,
                 'title' => $title,
                 'status' => $status,
                 'image' => $image,
+                'user' => $user
             ]
         );
         header("Location: /personnalWebsites/todo_list/public/task/");
@@ -158,8 +167,8 @@ $task = $pdo->select(
 
         $loader = new FilesystemLoader(dirname(__DIR__) . "\\templates");
         $twig = new Environment($loader);
-        $keywords = strip_tags(urldecode(trim($_GET['keywords'])));
-        $posts = [];
+        $keyword = strip_tags(urldecode(trim($_POST['keyword'])));
+        $tasks = [];
             
         $pdo = new Database(
             "127.0.0.1",
@@ -169,15 +178,51 @@ $task = $pdo->select(
             ""
         );
 
-        $posts = $pdo->selectAll("SELECT * FROM post WHERE title LIKE '%".$keywords."%' OR description LIKE '%".$keywords."%' OR image LIKE '%".$keywords."%' ORDER BY id");
+        $tasks = $pdo->selectAll("SELECT * FROM task WHERE title LIKE '%".$keyword."%' OR status LIKE '%".$keyword."%' OR image LIKE '%".$keyword."%' OR user LIKE '%".$keyword."%' ORDER BY id");
 
 
         echo $twig->render('searchpage.twig', [
-            'posts' => $posts,
-            'keywords' => $keywords
+            'tasks' => $tasks,
+            'keyword' => $keyword
         ]);
         
         
      }
+
+     public function updateStatus($id) {
+         
+        $loader = new FilesystemLoader(dirname(__DIR__) . "\\templates");
+        $twig = new Environment($loader);
+        $pdo = new Database(
+             "127.0.0.1",
+             "todolist",
+             "3306",
+             "root",
+             ""
+        );
+        
+        $updated_status = $pdo->select("SELECT status FROM task WHERE id = " . $id);
+        $updated_status = $updated_status['status'];
+        var_dump($updated_status);
+        if ($updated_status == 'in_progress')
+        {
+            $updated_status = 'done';
+        }
+        if ($updated_status == 'pending')
+        {
+            $updated_status = 'in_progress';
+        }
+
+
+        $pdo->query("UPDATE task SET status = :status WHERE id = " . $id,["status" => $updated_status]);
+        
+        // $task2 = $pdo2-> select("SELECT * from task");
+        header('Location: /personnalWebsites/todo_list/public/task/');
+
+        echo $twig->render('taskpage.twig', [
+            'updated_status' => $updated_status
+    
+            ]);
+    }
     
 }

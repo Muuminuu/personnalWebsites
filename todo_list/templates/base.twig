@@ -22,13 +22,13 @@
           </div>
         </div>
 
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btnsearch" type="submit" href "/personnalWebsites/todo_list/public/task/search">Search</button>
+      <form class="d-flex" role="search" method="POST" action="/personnalWebsites/todo_list/public/task/search/">
+        <input class="form-control me-2" type="search" name="keyword" placeholder="Search" aria-label="Search">
+        <button class="btn btnsearch" type="submit" href="/personnalWebsites/todo_list/public/task/search/">Search</button>
       </form>
         {# <form class="d-flex" role="search" method="GET">
           <input name="page" value="search" type="hidden">
-          <input name="keywords" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <input name=keywords" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
           <button class="btn btn-outline-success" type="submit">Search</button>
         </form> #}
 

@@ -20,7 +20,7 @@ class AdminPostController extends AbstractController{
     }
 
     public function index() {
-
+// WIP CACA 
         $template = './views/template_admin_post_add.phtml';
         $this->render($template, [
 

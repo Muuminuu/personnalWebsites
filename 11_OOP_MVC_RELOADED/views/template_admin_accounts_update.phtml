@@ -1,6 +1,6 @@
-<h1>Update user</h1>
+<h1>Update user <?= $this_id ?></h1>
     <section id="accounts"></section>
-    <form class="row g-3" action="?page=adminaccountsadd" method="POST">
+    <form class="row g-3" action="?page=adminaccounts&action=update&id=<?= $this_id ?>" method="POST">
             <div class="col-6">
                 <label for="firstname" class="form-label">Firstname*</label>
                 <input required type="text" class="form-control" id="firstname" name="firstname" value="<?= $user['firstname']?>" 
@@ -39,7 +39,7 @@
                 <input type="text" class="form-control" id="zip" name="zip" value="<?= $user['zip']?>">
             </div>
             <div>
-                <legend>Actuals roles : <?= $user_role ?></legend>
+                <legend>Actuals roles : <?= $user['roles'] ?></legend>
                 <div>Want to change roles ?</div>
                 <div>
                     <div>
